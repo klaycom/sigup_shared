@@ -1,0 +1,51 @@
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+		
+		
+    
+	
+	google.load("visualization", "1", {packages:["corechart"]});
+    google.setOnLoadCallback(drawChart);
+	
+    function drawChart() {
+      var data = google.visualization.arrayToDataTable([
+        ['Serviço', 'Valor'],
+		//<!-- BEGIN EACH_CHART_SERVICO -->
+        ['{TIPOSERVICO}', {CHART_VALOR}]{COMA1}
+		//<!-- END EACH_CHART_SERVICO -->
+		
+      ]);
+      var options = {
+		is3D:true,
+		chartArea:{left:10,top:10,width:"90%",height:"90%"}
+      };
+
+      var chart = new google.visualization.PieChart(document.getElementById('chart_gastos'));
+      chart.draw(data, options);
+    }
+	
+	
+	google.setOnLoadCallback(drawChart2);
+    function drawChart2() {
+        var data = google.visualization.arrayToDataTable([
+			['Meses', '{ANO_ATU}', 'Média'],
+			//<!-- BEGIN EACH_AREACHART -->
+			['{MESANO}/{ANO_ATU}', {AREA_VAL}, {MEDTOT_VAL}]{COMA}
+			//<!-- END EACH_AREACHART -->
+
+        ]);
+
+        var options = {
+			title: 'Agregado de todos os serviços em R$',
+			hAxis: {title: 'Meses de {ANO_ATU}',  titleTextStyle: {color: '#333'}},
+			vAxis: {minValue: 0},
+			pointSize: 6,
+			chartArea:{left:97,top:50,width:"90%",height:"50%"}
+        };
+
+		var chart = new google.visualization.AreaChart(document.getElementById('area-chart'));
+		chart.draw(data, options);
+    }
+	
+	
+    </script>

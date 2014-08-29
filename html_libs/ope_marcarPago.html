@@ -1,0 +1,65 @@
+<div class="content">
+	<div class="inner-content">
+		<h2>Marcar Notas como Pagas</h2>
+		<p><b>Escolha um outro período</b>:</p>
+		<ul class="side-list">
+			<!-- BEGIN EACH_MESLIST -->
+			<li><a href="ope_marcarPago.php?mes={MESLISTNUM}">{MESLIST}</a></li>
+			<!-- END EACH_MESLIST -->
+		</ul>
+		<br style="clear:both" />
+		<br />
+		<h2>Notas marcadas como não pagas de {PERIODO}:</h2>
+		<p><b>Digite a data de pagamento</b>: <input type="text" name="data" maxlength="10"></p>
+		
+		<!-- BEGIN EACH_CONTRATO -->
+		<div class="separator">
+			<h3>{AUTOS}</h3>{SQL}
+			<div class="simple-table">
+				<table class="tabela" width="100%">
+					<thead>
+						<tr>
+							<th>N° DA NOTA</th>
+							<th>UO</th>
+							<th>UC (RGI / INST / N°)</th>
+							<th>DATA REF</th>
+							<th>EMPRESA</th>
+							<th>PROV</th>
+							<th>CONSUMO</th>
+							<th>VALOR</th>
+							<th>DATA DE<br />EMISSÃO</th>
+							<th>DATA DE<br />LANCTO</th>
+							<th>PAGO EM</th>
+						</tr>
+					</thead>			
+					<tbody>
+					<!-- BEGIN EACH_NOTAS -->
+						<tr>
+							<td align="center"><small>{NOTANUM}</small></td>
+							<td>{UO}</td>
+							<td><small>{UC}</small></td>	
+							<td align="center"><small>{DATAREF}</small></td>
+							<td align="center"><small>{EMPRESA}</small></td>
+							<td align="center"><small>{PROV}</small></td>
+							<td align="right" style="border-left:1px solid #ccc">{CONSUMO}</td>
+							<td align="right" style="border-left:1px solid #ccc; border-right:1px solid #ccc">{VALOR}</td>
+							<td align="center"><small>{EMISSAO}</small></td>
+							<td align="center"><small>{LANCTO}</small></td>
+							<td align="center" class="td-container-{NOTAID}">{SUBMIT}</td>
+						</tr>
+					<!-- END EACH_NOTAS -->
+					<!-- BEGIN SEM_NOTAS -->
+						<tr>
+							<td colspan="10" align="center"><i><b>Não há notas lançadas para este serviço neste período.</b></i></td>
+						</tr>
+					<!-- END SEM_NOTAS -->
+					</tbody>					
+				</table>
+				
+			</div>
+		</div>
+		<!-- END EACH_CONTRATO -->
+		
+	</div>
+	</br>
+</div>

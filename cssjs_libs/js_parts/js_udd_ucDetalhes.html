@@ -1,0 +1,71 @@
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+		
+		
+    
+	
+	google.load("visualization", "1", {packages:["corechart"]});
+    google.setOnLoadCallback(drawChart);
+	google.setOnLoadCallback(drawChart2);
+    function drawChart() {
+      var data = google.visualization.arrayToDataTable([
+        ['Meses', '{ANO_ANT}', '{ANO}'],
+		//<!-- BEGIN EACH_CHART_CONS -->
+        ['{MESANALITICO}', {CHART_CONSANT}, {CHART_CONSPOST}]{COMA}
+		//<!-- END EACH_CHART_CONS -->
+		
+      ]);
+      var options = {
+        title: 'Comparativo de Consumo de {TIPONOME}',
+        hAxis: {title: 'Meses', titleTextStyle: {color: 'red'}},
+		vAxis: {title: 'Consumo em {TIPOCONS}', titleTextStyle: {color: 'red'}}
+      };
+
+      var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+      chart.draw(data, options);
+    }
+	
+    function drawChart2() {
+      var data = google.visualization.arrayToDataTable([
+        ['Meses', '{ANO_ANT}', '{ANO}'],
+		//<!-- BEGIN EACH_CHART_PAGO -->
+        ['{MESANALITICO}', {CHART_PAGOANT}, {CHART_PAGOPOST}]{COMA}
+		//<!-- END EACH_CHART_PAGO -->
+		
+      ]);
+      var options = {
+        title: 'Comparativo em Reais de {TIPONOME}',
+        hAxis: {title: 'Meses', titleTextStyle: {color: 'red'}},
+		vAxis: {title: 'Consumo em R$', titleTextStyle: {color: 'red'}}
+      };
+
+      var chart = new google.visualization.ColumnChart(document.getElementById('chart_div2'));
+	  chart.draw(data, options);
+    }
+	
+	$(document).ready(function(){
+	
+		$('#show-resumo').click(function(){
+		
+			makeResumo();
+		
+		});
+		
+		function makeResumo(){
+		
+			$.get("udd_ucResumo.php",{ chave : "{CHAVE}" })
+				
+				.done(function(data){
+										
+				$('#resumo-container').html(data);
+									
+			});			
+		
+		}
+	
+	});
+	
+
+	
+	
+    </script>

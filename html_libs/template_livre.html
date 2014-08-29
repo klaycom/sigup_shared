@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+		<meta charset="utf-8">
+		
+		<title>Sistema DAEE - ADA</title>
+		<link type="text/css" rel="stylesheet" href="cssjs_libs/geral.css" />
+		<script language="javascript" src="cssjs_libs/jquery.js"></script>
+		<script language="javascript" src="cssjs_libs/less.js"></script>
+		{JSCRIPT}
+	</head>
+	<body>
+		<div id="header">
+			<div class="inner">
+				<h1><img src="images/desperdicio-zero.jpg" style="float:right"  width="150" height="150" /><img src="images/logo-sigup.jpg"style="float:right" />Sistema de <br />Gerenciamento de despesas com Utilidade Pública</h1>
+				<img src="images/logo-daee.png" width="117" height="150">
+			</div>
+		</div>
+		<div id="menu">
+			<ul>
+				<li style="width:100%"><a href="resumo_dl.php">DOWNLOAD DE RELATÓRIOS</a></li>
+			</ul>
+		</div>		
+		<div id="menu-2" class="second" >
+			<ul>
+			<!--
+				<li style="width:25%"><a href="ope_lancamento.php">FAZER LANÇAMENTOS</a></li>
+				<li style="width:25%"><a href="udd_index.php">RELATÓRIOS</a></li>
+				<li style="width:25%"><a href="ger_index.php">GERENCIAR INFORMAÇÕES</a></li>
+				<li style="width:25%"><a href="logout.php">LOGOUT</a></li>
+			-->
+				<li style="float:right"><a href="logout.php">SAIR</a></li>			
+				<li style="text-align:center; width:270px; background:none" ><b>{MENU_NAME}</b></li>
+				<!-- BEGIN ITEM_MENU -->
+					<li><a href="{ITEM_MENU_URL}">{ITEM_MENU_LINK}</a></li>
+				<!-- END ITEM_MENU -->
+			</ul>
+		</div>
+		<div>
+			{SECONDMENU}
+			<div id="conteudo">
+				
+				{CONTEUDO}
+			
+			</div>
+		</div>
+		<div id="footer">
+		
+			<p><b>SIGUP</b> - Sistema de Gerenciamento de Despesas com Utilidade Pública<br />
+			Dúvidas, sugestões ou correções: (11) 3293-8543 - Gabriel Toshinori Nakano <br /><b>DAEE - São Paulo</b></p>
+			
+			<small>{EXECTIME}<small>
+		
+		</div>
+	</body>
+</html>

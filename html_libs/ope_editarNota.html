@@ -1,0 +1,158 @@
+<div class="content">
+	<div class="inner-content">
+		
+		<!-- BEGIN TABLE_BODY -->
+		<h2>Editar Notas</h2>
+		<p><b>Escolha um outro período</b>:</p>
+		<ul class="side-list">
+			<!-- BEGIN EACH_MESLIST -->
+			<li><a href="ope_editarNota.php?mes={MESLISTNUM}">{MESLIST}</a></li>
+			<!-- END EACH_MESLIST -->
+		</ul>
+		<br style="clear:both" />
+		<br />
+		<h2>Notas marcadas como não pagas de {PERIODO}:</h2>
+		
+		<!-- BEGIN EACH_CONTRATO -->
+		<div class="separator">
+			<h3>{AUTOS}</h3>{SQL}
+			<div class="simple-table">
+				<table class="tabela" width="100%">
+					<thead>
+						<tr>
+							<th>N° DA NOTA</th>
+							<th>UO</th>
+							<th>UC (RGI / INST / N°)</th>
+							<th>DATA REF.</th>
+							<th>EMPRESA</th>
+							<th>CONSUMO</th>
+							<th>VALOR</th>
+							<th>DATA DE<br />EMISSÃO</th>
+							<th>DATA DE<br />LANCTO.</th>
+							<th>EDITAR</th>
+						</tr>
+					</thead>			
+					<tbody>
+					<!-- BEGIN EACH_NOTAS -->
+						<tr>
+							<td align="center"><small>{NOTANUM}</small></td>
+							<td>{UO}</td>
+							<td><small>{UC}</small></td>	
+							<td align="center"><small>{DATAREF}</small></td>
+							<td align="center"><small>{EMPRESA}</small></td>
+							<td align="right" style="border-left:1px solid #ccc">{CONSUMO}</td>
+							<td align="right" style="border-left:1px solid #ccc; border-right:1px solid #ccc">{VALOR}</td>
+							<td align="center"><small>{EMISSAO}</small></td>
+							<td align="center"><small>{LANCTO}</small></td>
+							<td align="center" class="td-container-{NOTAID}">{SUBMIT}</td>
+						</tr>
+					<!-- END EACH_NOTAS -->
+					<!-- BEGIN SEM_NOTAS -->
+						<tr>
+							<td colspan="10" align="center"><i><b>Não há notas lançadas para este serviço neste período.</b></i></td>
+						</tr>
+					<!-- END SEM_NOTAS -->
+					</tbody>					
+				</table>
+				
+			</div>
+		</div>
+		<!-- END EACH_CONTRATO -->
+		<!-- END TABLE_BODY -->
+		
+		<!-- BEGIN FORM_BODY -->
+		<h2>Nota N°{NOTANUM} - {UCNOME} RG/N°/INST - {UC}</h2>
+
+		<p>Por motivos de segurança é possível editar apenas um campo por vez. Se necessário clique novamente em <b>Editar Notas</b> e escolha a nota que deseja alterar.</p>
+		<h3>Informações Atuais da Nota</h3>
+		<table class="tabela" width="100%">
+			<thead>
+				<tr>
+					<th>N° DA NOTA</th>
+					<th class="th-nao-editavel">UO</th>
+					<th class="th-nao-editavel">UC (RGI / INST / N°)</th>
+					<th class="th-nao-editavel">DATA REF.</th>
+					<th class="th-nao-editavel">EMPRESA</th>
+					<th>EMISSÃO</th>
+					<th>VENCTO</th>
+					<th>SAÍDA<br />ADA/DOF</th>
+					<th>PROV</th>
+					<th>CONSUMO</th>
+					<th>VALOR</th>
+					<th class="th-nao-editavel">USUÁRIO</th>
+				</tr>
+			<thead>
+			<tbody>
+				<tr>
+					<td style="border:1px solid #ccc" align="center"><small>{NOTANUM}</small></td>
+					<td style="border:1px solid #ccc" align="center"><small><b>{UO}</b></small></td>
+					<td style="border:1px solid #ccc" align="center"><small><b>{UC}</b></small></td>
+					<td style="border:1px solid #ccc" align="center"><small><b>{DATA_REF}</b></small></td>
+					<td style="border:1px solid #ccc" align="center"><small><b>{EMPRESA}</b></small></td>
+					<td style="border:1px solid #ccc" align="center"><small>{EMISSAO}</small></td>
+					<td style="border:1px solid #ccc" align="center"><small>{VENCTO}</small></td>
+					<td style="border:1px solid #ccc" align="center"><small>{SAIDA}</small></td>
+					<td style="border:1px solid #ccc" align="center"><small>{PROV}</small></td>
+					<td style="border:1px solid #ccc" align="center"><small>{CONSUMO}</small></td>
+					<td style="border:1px solid #ccc" align="center"><small>{VALOR}</small></td>
+					<td style="border:1px solid #ccc" align="center"><small><b>{USUARIO}</b></small></td>
+				</tr>
+				<tr>
+					<th style="border:1px solid #ccc" align="center" colspan="12">OBS E HISTÓRICO DE EDIÇÕES</th>
+				</tr>
+				<tr>
+					<td style="border:1px solid #ccc" height="40px" valign="top" colspan="12"><small>{OBS}</small></td>
+				</tr>
+			</tbody>
+			<tfoot>
+				<tr>
+					<td colspan="12" style="border:1px solid #ccc"><em>Os campos marcados pela cor <font color="#F08080"><b>avermelhada</b></font> não são editáveis.</em></td>
+				</tr>
+			</tfoot>
+		</table>
+		<h3>Formulário de Edição</h3>
+		<div id="simple-form">
+			<div class="alerta">
+				{ALERTA}
+			</div>
+			<div class="aviso">
+				{AVISO}
+			</div>		
+			<form method="post" action="ope_editarNota.php?chave={NID}">
+			<fieldset>
+				<legend>Editar apenas o campo</legend>
+				<select style="width:99%" name="editar">
+					<option value="">----- N°{NOTANUM} - UC: {UC} -----</option>
+					<option value="numero">NÚMERO DE NOTA FISCAL</option>
+					<option value="emissao">DATA DE EMISSÃO</option>
+					<option value="vencto">DATA DE VENCIMENTO</option>
+					<option value="saida">DATA DE SAÍDA DA ADA PARA DOF</option>
+					<option value="provisoria">NÚMERO DE PROVISÓRIA</option>
+					<option value="consumo">NÚMERO DE CONSUMO</option>
+					<option value="valor">VALOR DE NOTA</option>
+				</select>
+			</fieldset>
+			<fieldset>
+				<legend>Novo Valor</legend>
+				<input type="text" name="novo-numero" class="hidden" id="numero" maxlength="40" value="{NOTANUM}" title="{NOTANUM}" />
+				<input type="text" name="novo-emissao" class="hidden" id="emissao" maxlength="10" value="{EMISSAO}" title="{EMISSAO}" />
+				<input type="text" name="novo-vencto" class="hidden" id="vencto" maxlength="10" value="{VENCTO}" title="{VENCTO}" />
+				<input type="text" name="novo-saida" class="hidden" id="saida" maxlength="10" value="{SAIDA}" title="{SAIDA}" />
+				<input type="text" name="novo-provisoria" class="hidden" id="provisoria" maxlength="10" value="{PROV}" title="{PROV}" />
+				<input type="text" name="novo-consumo" class="hidden" id="consumo" maxlength="10" value="{CONSUMO}" title="{CONSUMO}" />
+				<input type="text" name="novo-valor" class="hidden" id="valor" maxlength="10" value="{VALOR}" title="{VALOR}" />
+			</fieldset>			
+			<fieldset>
+				<legend>Justificativa de Edição</legend>
+				Digite abaixo o motivo de realizar esta correção:
+				<textarea style="width:99%" name="obs" id="obs" rows="6"></textarea>
+			</fieldset>
+			<div class="submitter">
+				<input type="submit" id="submitButton" value="Enviar" />
+			</div>
+			</form>
+		</div>
+		<!-- END FORM_BODY -->
+	</div>
+	</br>
+</div>

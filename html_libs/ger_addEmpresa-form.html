@@ -1,0 +1,43 @@
+<div class="content">
+	<div class="inner-content">
+		<h2>Cadastrar Empresa</h2>
+		<ul>
+			<li>Os campos marcados com * devem ser preenchidos obrigatoriamente.</li>
+		</ul>
+		<div id="simple-form">
+			<div class="alerta">
+				{ALERTA}
+			</div>
+			<div class="aviso">
+				{AVISO}
+			</div>
+			<form name="addEmpresa" method="post" action="ger_addEmpresa.php?form">
+				<fieldset>
+					<legend>Nome da Empresa *</legend>
+					<input type="text" name="nome" />
+				</fieldset>
+				<fieldset>
+					<legend>CNPJ*<em>Apenas números</em></legend>
+					<input type="text" name="cnpj" maxlength="14" />
+				</fieldset>
+				<fieldset>
+					<legend>Descrição *<em>Informações Gerais</em></legend>
+					<input type="text" name="desc" />
+				</fieldset>				
+				<fieldset>
+					<legend>Nome de Representante</legend>
+					<input type="text" name="represent" />
+				</fieldset>
+				<fieldset>
+					<legend>Contato<em>Número de telefone e/ou endereço de email</em></legend>
+					<input type="text" name="contato" />
+				</fieldset>
+				<div class="submitter">
+					<input type="submit" value="Enviar" />
+					<input type="reset" value="Resetar" />
+				</div>
+			</form>
+		</div>
+	</div>
+	</br>
+</div>

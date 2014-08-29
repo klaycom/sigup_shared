@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<servicos>
+	<servico>
+		<nome>Água</nome>
+		<descricao>Fornecimento de água e tratamento de esgoto</descricao>
+	</servico>
+	<servico>
+		<nome>Energia de Alta Tensão</nome>
+		<descricao>Serviço de distribuição de Energia Elétrica de Alta e Baixa Tensão</descricao>
+	</servico>
+	<servico>
+		<nome>Energia de Baixa Tensão</nome>
+		<descricao>Serviço de distribuição de Energia Elétrica de Baixa Tensão</descricao>
+	</servico>
+	<servico>
+		<nome>Reprografia</nome>
+		<descricao>Serviço de Aluguel de Máquinas Corporativas</descricao>
+	</servico>
+<servico>
+<nome>Telefonia Celular</nome>
+<descricao>Prestação de serviço de comunicação por telefones celulares</descricao>
+</servico>
+<servico>
+<nome>Telefonia Fixa</nome>
+<descricao>Serviço de comunicação por telefonia fixa</descricao>
+</servico>
+<servico>
+<nome>Gás</nome>
+<descricao>Serviço de fornecimento de Gás</descricao>
+</servico>
+</servicos>

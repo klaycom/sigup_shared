@@ -1,0 +1,29 @@
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+		
+	google.load("visualization", "1", {packages:["corechart"]});	
+	
+	//<!-- BEGIN CHART_JS -->
+	
+	google.setOnLoadCallback(drawChart{CHART_INDEX});
+	
+    function drawChart{CHART_INDEX}() {
+      var data = google.visualization.arrayToDataTable([
+        ['Unidades', 'Valor'],
+		//<!-- BEGIN EACH_CHART_VAL -->
+        ['{CHART_UO}', {CHART_VAL}]{CHART_COMA}
+		//<!-- END EACH_CHART_VAL -->
+		
+      ]);
+      var options = {
+        title: '{CHART_TIPO_NOME}',
+		is3D:true
+      };
+
+      var chart = new google.visualization.PieChart(document.getElementById('chart_div{CHART_INDEX}'));
+      chart.draw(data, options);
+    }
+	
+	//<!-- END CHART_JS -->
+	
+    </script>

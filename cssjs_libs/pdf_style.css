@@ -1,0 +1,23 @@
+		body { font-family: serif; font-size: 10pt;  }
+		p { 	text-indent:30px; text-align: justify; margin-bottom: 6pt;  margin-top:6pt; font-family: serif; padding-left: 5px; line-height:19pt}
+
+		h2{font-family: serif;}
+		h3{font-family: serif;}
+		
+		hr {	width: 70%; height: 1px; 
+			text-align: center; color: #999999; 
+			margin-top: 8pt; margin-bottom: 8pt; }
+
+		a {	color: #000066; font-style: normal; text-decoration: underline; 
+			font-weight: normal; }
+
+		ul {	text-indent: 5mm; margin-bottom: 9pt; }
+		ol {	text-indent: 5mm; margin-bottom: 9pt; }
+
+		th{ font-family: arial; text-align:left; padding-left:8px; font-size: 11pt;}
+		td{ font-family: arial; padding-left:8px}
+		small{ font-family: serif;}
+		
+		.serif-small{font-family: serif; font-size: 8pt;}
+		.bold-blue{color:#00b2ec; font-weight:bold}
+

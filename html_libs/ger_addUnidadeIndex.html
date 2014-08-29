@@ -1,0 +1,93 @@
+<div class="content">
+	<div class="inner-content">
+		<h2>Cadastrar Unidades</h2>
+		<ul>
+			<li><b>Unidades Operacionais</b> são as divisões operacionais do DAEE.</li>
+			<li><b>Unidades Consumidoras</b> são as localidades vinculadas às Unidades Operacionais das quais consomem algum tipo de serviço.</li>
+			<li>Antes de cadastrar uma nova Unidade, verifique abaixo se a mesma já se encontra cadastrada no sistema.</li>
+		</ul>
+		<div id="central-options">
+			<h3>Prosseguir aos formulários de cadastro</h3>
+			<button id="uo-link">UNIDADE OPERACIONAL</button>
+			<button id="uc-link">UNIDADE CONSUMIDORA</button>
+		</div>				
+		<div id="simple-table">
+			<h3>Unidades Operacionais</h3>
+			<table class="borda-simples" width="100%">
+				<tr>
+					<th width="3%">
+						UO
+					</th>
+					<th>
+						SIGLA
+					</th>					
+					<th>
+						NOME DA UNIDADE
+					</th>
+					<th>
+						ENDEREÇO
+					</th>					
+					<th>
+						CIDADE
+					</th>
+					<th>
+						UC VINCULADAS
+					</th>
+				</tr>
+				
+				<!-- BEGIN EACH_UO -->
+				<tr>	
+					<td>{UOID}</td>
+					<td>{UOSIGLA}</td>
+					<td>{UONOME}</td>
+					<td>{UOEND}</td>
+					<td align="center">{UOCIDADE}</td>
+					<td align="center">{UOUCQTD}</td>
+				<tr>
+				<!-- END EACH_UO -->
+			</table>
+		</div>
+		
+		<div id="simple-table">
+			<h3>Unidades Consumidoras</h3>
+			<table class="borda-simples" width="100%">
+				<tr>
+					<th width="3%">
+						ID
+					</th>
+					<th width="3%">
+						RGI/INSTALAÇÃO
+					</th>					
+					<th width="12%">
+						TIPO
+					</th>
+					<th>
+						UO
+					</th>					
+					<th>
+						NOME
+					</th>						
+					<th>
+						ENDEREÇO
+					</th>					
+					<th>
+						CIDADE
+					</th>
+				</tr>
+				
+				<!-- BEGIN EACH_UC -->
+				<tr>	
+					<td>{UCID}</td>
+					<td>{UCRGI}</td>
+					<td>{UCTIPO}</td>
+					<td>{UCVINC}</td>
+					<td>{UCNOME}</td>
+					<td>{UCEND}</td>
+					<td>{UCCID}</td>
+				<tr>
+				<!-- END EACH_UC -->
+			</table>
+		</div>
+	</div>
+	</br>
+</div>

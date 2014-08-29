@@ -1,0 +1,45 @@
+	<table class="tabela" width="100%" style="margin-top:15px">
+		<tr>
+			<td>
+				
+			</td>
+			<th>
+				MESES PAGOS
+			</th>
+			<!-- BEGIN SHOW_HEADER_CONS -->
+			<th>
+				TOTAL CONSUMO
+			</th>
+			<th>
+				MÉDIA CONSUMO
+			</th>
+			<th>
+				VARIAÇÃO CONSUMO
+			</th>			
+			<!-- END SHOW_HEADER_CONS -->
+			<th>
+				TOTAL PAGO
+			</th>
+			<th>
+				MÉDIA PAGO
+			</th>
+			<th>
+				VARIAÇÃO PAGO
+			</th>
+		</tr>
+		<!-- BEGIN EACH_ANO_RESUMO -->
+		<tr>	
+			<th align="center">{ANO}</th>
+			<td align="center">{MESESPG}</td>
+			<!-- BEGIN SHOW_CONS -->
+			<td align="center">{TOTCONS}</td>
+			<td align="center">{MEDCONS}</td>
+			<td align="center">{VARCONS}</td>
+			<!-- END SHOW_CONS -->
+			<td align="right">R$ {TOTPAGO}</td>
+			<td align="right">R$ {MEDPAGO}</td>
+			<td align="right">{VARPAGO}</td>
+		<tr>
+		<!-- END EACH_ANO_RESUMO -->
+	</table>
+{TESTE}

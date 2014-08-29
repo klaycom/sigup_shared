@@ -1,0 +1,74 @@
+<div class="content">
+	<div class="inner-content">
+		<h2>Relatório de {UOSIGLA} - {UONOME}</h2>
+		<div class="separator">
+			<div class="right-subcontent">
+				<h3>Proporção de gastos de {UOSIGLA} em {ANO_ATU}</h3>
+				<div id="chart_gastos" style="border:1px dotted #333; padding:10px"></div>
+				
+				
+			</div>
+			<div class="left-content">
+				<h3>Informações:</h3>
+				<ul>
+					<h3>{UOSIGLA} - {UONOME}</h3>
+					<li><b>Quantidade de UCs Relacionadas: </b>{UOUCQTD}</li>
+					<li><b>Serviços Contratados: </b>{TIPOSSERVICOS}</li>
+					</ul>
+			</div>
+			<br style="clear:both" />
+			<br />
+		</div>
+		<div class="separator">
+			<h3 class="click-topic" >Histórico Geral de {UOSIGLA} - {UONOME}</h3>
+			<div id="area-chart">
+			</div>
+		</div>                
+		<div class="separator">
+			<h3 class="click-topic" >Pagamentos por Unidade Consumidora</h3>
+			<div class="simple-table">
+				<table class="tabela" width="100%">
+					<thead>
+						<tr>
+							<th rowspan="2">UC</th>
+							<th rowspan="2">NOME/STATUS</th>
+							<th rowspan="2">TIPO</th>
+							<th colspan="12">PAGAMENTOS DE {ANO_ATU}</th>
+							<th rowspan="2">TOTAL {ANO_ATU}</th>
+						</tr>
+						<tr>
+							<th width="80">Jan</th><th width="80">Fev</th><th width="80">Mar</th><th width="80">Abr</th><th width="80">Mai</th><th width="80">Jun</th>
+							<th width="80">Jul</th><th width="80">Ago</th><th width="80">Set</th><th width="80">Out</th><th width="80">Nov</th><th width="80">Dez</th>
+						</tr>
+					</thead>
+					<tbody>
+						<!-- BEGIN EACH_UC -->
+						<tr>
+							<td height="60"><small><a href="udd_ucDetalhes.php?chave={UCCHAVE}">{RGI}<br />{UCEMPRESA}</a></small></td>
+							
+							<td style="border-right:1px solid #ccc"><small><a href="udd_ucDetalhes.php?chave={UCCHAVE}">{UCNOME}</a></small>{UCSTATUS}</td>
+							<td style="border-right:1px solid #ccc"><small>{UCTIPO}</small></td>
+							<!-- BEGIN EACH_MESUC -->
+							<td style="border-right:1px solid #ccc" align="right"><small>{UCMESVAL}</small></td>
+							<!-- END EACH_MESUC -->
+							<td align="right"><small><b>{UCTOTAL}</b></small></td>
+						</tr>
+						<!-- END EACH_UC -->
+					</tbody>
+					<tfoot>
+						<tr style="border-top:1px solid #ccc">
+							<td colspan="3" style="border-right:1px solid #ccc">
+								<h4>TOTAL</h4>
+							</td>
+							<!-- BEGIN EACH_MESUCTOTAL -->
+							<td style="padding-right:8px;border-right:1px solid #ccc" align="right"><small><b>{UCMESTOTAL}</b></small></td>
+							<!-- END EACH_MESUCTOTAL -->
+							<td style="padding-right:8px" align="right"><b>{UOTOTAL}</b></td>
+						</tr>
+					</tfoot>
+				</table>
+			</div>
+		</div>
+	</div>
+	</br>
+</div>

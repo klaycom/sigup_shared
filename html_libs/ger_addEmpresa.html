@@ -1,0 +1,51 @@
+<div class="content">
+	<div class="inner-content">
+		<h2>Cadastrar Empresa</h2>
+		<ul>
+			<li>Antes de cadastrar uma nova empresa, verifique abaixo se a mesma já se encontra cadastrada no sistema.</li>
+		</ul>
+
+		<div id="simple-table">
+			<div class="prosseguir">
+				<a href="ger_addEmpresa.php?form">prosseguir ao formulário de cadastro >></a>
+			</div>		
+			<table class="borda-simples" width="100%">
+				<tr>
+					<th>
+						ID
+					</th>
+					<th>
+						NOME
+					</th>					
+					<th>
+						CNPJ
+					</th>
+					<th>
+						DESCRIÇÃO
+					</th>
+					<th>
+						REPRESENTANTE
+					</th>
+					<th>
+						CONTATO
+					</th>
+				</tr>
+				
+				<!-- BEGIN EACH_EMPRESA -->
+				<tr>	
+					<td align="center">{EMPID}</td>
+					<td>{EMPNOME}</td>
+					<td>{EMPCNPJ}</td>
+					<td>{EMPDESC}</td>
+					<td>{EMPREPRE}</td>
+					<td>{EMPCONTACT}</td>
+				<tr>
+				<!-- END EACH_EMPRESA -->
+			</table>
+			<div class="prosseguir">
+				<a href="ger_addEmpresa.php?form">prosseguir ao formulário de cadastro >></a>
+			</div>
+		</div>
+	</div>
+	</br>
+</div>

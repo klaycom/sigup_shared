@@ -1,0 +1,27 @@
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+		
+    google.load("visualization", "1", {packages:["corechart"]});
+    google.setOnLoadCallback(drawChart);
+    function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+			['Ano', {LEGENDS}],
+			//<!-- BEGIN EACH_CHART -->
+			['{MESANO}', {VAL}]{COMA}
+			//<!-- END EACH_CHART -->
+
+        ]);
+
+        var options = {
+			title: '{TITULO_EVO} de {ANO_ANT} a {ANO_ATU}',
+			hAxis: {title: '{ANO_ANT} a {ANO_ATU}',  titleTextStyle: {color: '#333'}},
+			vAxis: {title: 'Pago em R$', minValue: 0,titleTextStyle: {color: 'red'}},
+			pointSize: 6,
+			chartArea:{left:97,top:50,width:"85%",height:"50%"}
+        };
+
+		var chart = new google.visualization.AreaChart(document.getElementById('area-chart'));
+		chart.draw(data, options);
+    }
+	  
+    </script>

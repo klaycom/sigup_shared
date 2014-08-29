@@ -1,0 +1,106 @@
+<div class="content">
+	<div class="inner-content">
+		<h2>Novo Autos/Processo</h2>
+		<ul>
+			<li>Os campos marcados com * devem ser preenchidos obrigatoriamente.</li>
+		</ul>
+		<div id="simple-form">
+			<div class="alerta">
+				{ALERTA}
+			</div>
+			<div class="aviso">
+				{AVISO}
+			</div>
+			<form name="addEmpresa" method="post" action="ger_addContrato.php?form">
+				<fieldset>
+					<legend>Tipo *</legend>
+					<input type="radio" name="tipo" value="0" id="id-autos" /> <label for="id-autos">Autos</label>
+					<input type="radio" name="tipo" value="1" id="id-proce" /> <label for="id-proce">Processo</label>
+				</fieldset>
+				<fieldset>
+					<legend>Número *</legend>
+					<input type="text" name="numero" /> <small>Ex: 43.567 ou 01/2013</small>
+				</fieldset>
+				<fieldset>
+					<legend>Título do Autos/Processo *</legend>
+					<input type="text" name="titulo" />
+				</fieldset>
+				<fieldset>
+					<legend>Com Licitação? *</legend>
+					<input type="radio" name="licit-bool" value="0" id="s-licit" /> <label for="s-licit">Sem licitação</label>
+					<input type="radio" name="licit-bool" value="1" id="c-licit" /> <label for="c-licit">Com Licitação</label>
+				</fieldset>				
+				<fieldset>
+					<legend>Empresa *</legend>
+					<select name="empresa">
+						<!-- BEGIN EACH_EMP -->
+						<option value="{EMPID}">{EMPNOME} - CNPJ {CNPJ}</option>
+						<!-- END EACH_EMP -->
+					</select>	
+				</fieldset>
+				<fieldset>
+					<legend>Serviço Prestado *</legend>
+					<input type="radio" name="radioserv" value="0" id="radio-list" checked="checked" /> <label for="radio-list">O serviço já se encontra cadastrado na lista: </label>
+					<select name="servico-list">
+						<!-- BEGIN EACH_SERV -->
+						<option value="{SERVVAL}">{SERVNOME} - {SERVDESC}</option>
+						<!-- END EACH_SERV -->
+					</select>
+					<br />
+					<input type="radio" name="radioserv" value="1" id="radio-new" /> <label for="radio-new">Adicionar novo tipo de serviço: </label>
+					<div class="hidden" id="serv-form" style="background-color:#f2f2f2; margin:5px 10px; padding: 4px">
+						Nome do Serviço <input type="text" name="nome-serv" maxlength="20" /> 
+						<br />
+						Descrição <input type="text" name="desc-serv" size="80" /> 
+					</div>
+				</fieldset>
+				<fieldset>
+					<legend>Unidade Operacional</legend>
+					<select name="udd">
+						<!-- BEGIN EACH_UDD -->
+						<option value="{UDDID}">{UDDSIGLA} - {UDDNOME}</option>
+						<!-- END EACH_UDD -->
+					</select>
+					<small>Caso seja diversas unidades, selecione SEDE</small>
+				</fieldset>				
+				<fieldset>
+					<legend>N° do Contrato</legend>
+					<input type="text" name="contrato" /> <small>Ex: 2010/01/001.00 ou Sem Contrato</small>
+				</fieldset>
+				<fieldset>
+					<legend>Vigência<em>Início e término de contrato</em></legend>
+					De: <input type="text" name="vig-de" size="4" maxlength="5"/>
+					/ <select name="de-ano">
+						<!-- BEGIN EACH_ANO1 -->
+						<option value="{ANOVAL}">{ANOVAL}</option>
+						<!-- END EACH_ANO1 -->
+					</select>
+					<small>Formato: dd/mm / aaaa</small>
+					<br />
+					Até: <input type="text" name="vig-ate" size="4" maxlength="5"/>
+					/ <select name="ate-ano">
+						<!-- BEGIN EACH_ANO2 -->
+						<option value="{ANOVAL}">{ANOVAL}</option>
+						<!-- END EACH_ANO2 -->
+					</select>
+				</fieldset>
+				<fieldset>
+					<legend>Permissão de Lançamento *</legend>
+					<select name="permissao">
+						<!--option value="0">0 - Somente Leitura</option>
+						<option value="1">1 - Permissão Total </option-->
+						<option value="2">2 - Notas de Água</option>
+						<option value="3">3 - Notas de Energia</option>
+						<option value="4">4 - Notas de Telefonia</option>
+						<option value="5">5 - Notas de Gás</option>
+					</select>
+				</fieldset>					
+				<div class="submitter">
+					<input type="submit" value="Enviar" />
+					<input type="reset" value="Resetar" />
+				</div>				
+			</form>
+		</div>
+	</div>
+	</br>
+</div>

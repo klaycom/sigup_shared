@@ -1,0 +1,78 @@
+<div class="content">
+	<div class="inner-content">
+		<h2>Contas em Aberto - Pendências de Lançamento</h2>
+
+		<div class="rel_notas-form">
+			<form action="rel_pendentes.php" method="post">
+				<center>
+				<h3>Escolha a data de referência</h3>
+
+				<select name="mes_ref">
+					<option value="1">Janeiro</option>
+					<option value="2">Fevereiro</option>
+					<option value="3">Março</option>
+					<option value="4">Abril</option>
+					<option value="5">Maio</option>
+					<option value="6">Junho</option>
+					<option value="7">Julho</option>
+					<option value="8">Agosto</option>
+					<option value="9">Setembro</option>
+					<option value="10">Outubro</option>
+					<option value="11">Novembro</option>
+					<option value="12">Dezembro</option>
+					
+				</select>
+				<select name="ano_ref">
+					<!-- BEGIN EACH_ANOREF -->
+					<option value="{ANO_REF}">{ANO_REF}</option>
+					<!-- END EACH_ANOREF -->
+				</select>
+					<br /><br />
+					<input type="submit" value="Mostrar Notas Pendentes" >
+				</center>
+				
+			</form>
+			
+		</div>	
+
+		<!-- BEGIN RESULT_BLOCK -->
+		<div class="separator">
+			<h2>{NOTAQTD} NOTAS PENDENTES DE LANÇAMENTO PARA MÊS DE REFERÊNCIA: {MESNOME} {ANO}</h2>
+
+			{SQL}
+			<div class="simple-table">
+				<table class="tabela" width="100%">
+					<thead>
+						<tr>
+							<th></th>
+							<th>UO</th>
+							<th>UC (RGI / INST / N°)</th>
+							<th>ÚLTIMA DATA <br />DE VENCIMENTO</th>
+							<th>AUTOS / PROCESSO</th>
+						</tr>
+					</thead>			
+					<tbody>
+					<!-- BEGIN EACH_NOTAS -->
+						<tr>
+							<td align="center" style="border-right:1px solid #ccc"><small>{INDEX}</small></td>
+							<td align="center" style="border-right:1px solid #ccc"><small><b>{UO}</b></small></td>
+							<td><small>{UC}</small></td>
+							<td align="center"><small>{VENCTO}</small></td>
+							<td><small>{AUTOS}</small></td>
+						</tr>
+					<!-- END EACH_NOTAS -->
+					<!-- BEGIN SEM_NOTAS -->
+						<tr>
+							<td colspan="10" align="center"><i><b>Não há notas lançadas para este serviço neste período.</b></i></td>
+						</tr>
+					<!-- END SEM_NOTAS -->
+					</tbody>					
+				</table>
+				
+			</div>
+		</div>
+		<!-- END RESULT_BLOCK -->		
+		<!-- END RESULT_BLOCK -->		
+	</div>
+	</br>
+</div>

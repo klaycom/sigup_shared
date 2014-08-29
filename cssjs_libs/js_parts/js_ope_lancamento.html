@@ -1,0 +1,237 @@
+<link rel="stylesheet" href="cssjs_libs/magicsuggest-1.3.1-min.css">
+<script type="text/javascript" src="cssjs_libs/magicsuggest-1.3.1-min.js"></script>
+
+<script type="text/javascript">
+	
+$(document).ready(function(){
+
+	//$('input[name=valor]').focus();
+
+	var rgi = $('select[name=rgi]').val();
+	var data_ref = $('select[name=mes_ref]').val() + "-" + $('select[name=ano_ref]').val();
+	$.post("actions.php", {action:"verificaNota", ucid:rgi, data:data_ref}, function(data){
+		
+		$('#hidden-val').val(data);
+		
+	});
+
+	$('#hidden-val').val(-1);
+	$('select[name=rgi]').change(function(){
+	
+		var rgi = $('select[name=rgi]').val();
+		var data_ref = $('select[name=mes_ref]').val() + "-" + $('select[name=ano_ref]').val();
+		$.post("actions.php", {action:"verificaNota", ucid:rgi, data:data_ref}, function(data){
+			
+			$('#hidden-val').val(data);
+			
+		});
+	
+	});
+	
+	$('select[name=mes_ref]').change(function(){
+	
+		var rgi = $('select[name=rgi]').val();
+		var data_ref = $('select[name=mes_ref]').val() + "-" + $('select[name=ano_ref]').val();
+		$.post("actions.php", {action:"verificaNota", ucid:rgi, data:data_ref}, function(data){
+			
+			$('#hidden-val').val(data);
+			
+		});
+	
+	});
+
+	$('select[name=ano_ref]').change(function(){
+	
+		var rgi = $('select[name=rgi]').val();
+		var data_ref = $('select[name=mes_ref]').val() + "-" + $('select[name=ano_ref]').val();
+		$.post("actions.php", {action:"verificaNota", ucid:rgi, data:data_ref}, function(data){
+			
+			$('#hidden-val').val(data);
+			
+		});
+	
+	});	
+
+	
+	$('#submitButton').click(function(){
+	
+		var invalidos = 0;
+		var html = "";
+		
+		var rgi = $('select[name=rgi]').val();
+		if(rgi <= 0){
+			invalidos++;
+			html += invalidos + " - Selecione uma UC válida.<br />";
+		}
+		
+		var nota = $('input[name=nota]').val();
+		/*if(!validLength(nota, 4, 15)){
+			invalidos++;
+			html += invalidos + " - Digite um número de nota fiscal válida. De 4 a 15 caracteres.<br />";
+		}*/
+		if(nota == ""){
+		
+			$('input[name=nota]').val('Indefinido');
+		
+		}
+
+		var data_ref = $('select[name=mes_ref]').val() + "-" + $('select[name=ano_ref]').val();
+		if($("#mantem-data_ref").is(':checked')){
+			
+			$("input[name=hide-mes_ref]").val(data_ref);
+			
+		}		
+		var emissao = $('input[name=emissao]').val();
+		if($("#mantem-emissao").is(':checked') && !validLength(emissao,10,10)){
+			invalidos++;
+			html += invalidos + ' - Se marcou "manter valores" em Emissão, digite uma data válida.<br />';			
+		}
+		if(!validDate(emissao)){
+			invalidos++;		
+			html += invalidos + ' - Data de Emissão inválida. Formato dd/mm/aaaa. <br />';			
+		}
+		
+		var vencto = $('input[name=vencto]').val();
+		if($("#mantem-vencto").is(':checked') && !validLength(vencto,10,10)){
+			invalidos++;
+			html += invalidos + ' - Se marcou "manter valores" em Vencimento, digite uma data válida.<br />';			
+		}
+		if(!validDate(vencto)){
+			invalidos++;
+			html += invalidos + ' - Data de Vencimento inválida ou em branco. Formato dd/mm/aaaa. <br />';			
+		}
+
+		var saida = $('input[name=saida]').val();
+		if($("#mantem-saida").is(':checked') && !validLength(saida,10,10)){
+			invalidos++;
+			html += invalidos + ' - Se marcou "manter valores" em Saída, digite uma data válida.<br />';
+		}
+		if(saida != "" && !validDate(saida)){
+			invalidos++;
+			html += invalidos + ' - Data de Saída inválida. Formato dd/mm/aaaa. <br />';			
+		}
+		
+		var consumo = $('input[name=consumo]').val();
+		if(consumo != "" && !validNumber(consumo,true)){
+			invalidos++;
+			html += invalidos + ' - Número de consumo inválido.<br />';			
+		}		
+		
+		var valor  = $('input[name=valor]').val();
+		if(valor != ""){
+			if(!validNumber(valor,true)){
+				invalidos++;
+				html += invalidos + ' - Valor da nota digitado inválido.<br />';			
+			}
+		}else{
+			invalidos++;
+			html += invalidos + ' - O campo Valor é obrigatório.<br />';		
+		}
+
+		var prov = $('input[name=prov]').val();
+		if($("#mantem-prov").is(':checked') && !validLength(prov,1,10)){
+			invalidos++;
+			html += invalidos + ' - Se marcou "manter valores" em Provisória, digite um número no campo.<br />';
+		}	
+		
+		//alert(nota);
+		
+		if(invalidos > 0){
+			
+						var splitted = emissao.split('/');
+			var dia = parseInt(splitted[0]);
+			var mes = splitted[1];
+			var ano = parseInt(splitted[2]);	
+			$('.alerta').html("Número de Alertas: " + invalidos +"<br />" + html);
+			$('.aviso').html("");
+			return false;
+			
+		}else{			
+			
+			if($('#hidden-val').val() >= 0){
+			
+				var sendYes = confirm("Já foi feito um lançamento para o mesmo RGI / Instalação para esta data de referência no total de R$"+ $('#hidden-val').val() +". Deseja continuar com este lançamento?");
+				if(sendYes){
+				
+					return true;
+				
+				}else{
+				
+					return false;
+				
+				}
+
+				
+			}else{
+			
+				return true;
+			
+			}
+			
+		}
+	
+	});
+
+	
+});	
+
+function validLength(variavel, min, max){
+	if(variavel != ""){
+		if(variavel.length <= max && variavel.length >= min)
+			return true;
+		else
+			return false;
+	}else{
+		return false;
+	}
+
+}
+
+function validDate(data){
+	if(data.length == 10){
+		var splitted = data.split('/');
+		var invalid = 0;
+		if(splitted.length == 3){
+			var dia = splitted[0];
+			var mes = splitted[1];
+			var ano = splitted[2];
+			if(mes <= 0 || mes > 12)
+				invalid++;
+			if(dia <= 0 || dia > 31)
+				invalid++;			
+			if(dia == 31 && (mes == 2 || mes == 4 || mes == 6 || mes == 9 || mes == 11))
+				invalid++;
+			if(dia > 29 && mes == 2)
+				invalid++;
+			if(ano < 2000)
+				invalid++;
+			if(invalid > 0)
+				return false;
+			else
+				return true;
+		}else
+			return false;
+	}else
+		return false;
+}
+
+function validNumber(num, positive){
+	if(num != ""){
+		var invalid = 0;
+		var num1 = parseFloat(num.replace(",", "."));
+		if(isNaN(num1))
+			invalid++;
+		if(num1 < 0 && positive)
+			invalid++;
+
+		if(invalid > 0)
+			return false;
+		else
+			return true;
+	}else
+		return false;
+}
+
+
+
+</script>

@@ -1,0 +1,434 @@
+body{
+	background: #f9f9f9;
+	font-size: 13px;
+	font-family: "Verdana";
+	color: #333;
+	line-height: 25px;
+	margin:0;
+	padding:0;
+}
+
+a{ text-decoration: none; font-weight: normal; color: #0066cc; }
+a:hover{ color: #004499; text-decoration: underline;}
+strong{ font-weight: bold; }
+h3{
+	color:#666
+}
+
+table{border:0}
+table td{border:0}
+
+#header{
+	height:184px;
+	background-color:#fff;
+}
+
+#header .inner{
+	margin:0 auto;
+	padding:15px 0 0 0;
+	width:1017px;
+	
+}
+
+#header .inner h1{
+	margin:0;
+	padding:19px 0 0;
+	display:inline;
+	float:right;
+	text-align:right;
+	font-family:"Arial";
+	font-size:210%;
+}
+
+#footer{
+	background-color:white;
+	border-top:6px solid #ccc;
+	padding:9px;
+	text-align:center;
+}
+
+#footer small{
+	font-size:60%;
+}
+
+#menu{
+	background-color:#dfdfdf;
+	height:29px;
+}
+
+#menu ul{
+	margin:0; padding:0;
+}
+
+#menu ul li{
+	display:inline-block;
+	height:27px;
+	float:left;
+	text-align:center;
+	padding-top:2px;
+	
+}
+
+#menu ul li a{
+	display:block;
+	border-right:2px solid #efefef;
+	border-bottom:2px solid #fff;
+	font-weight:bold;
+	color:#333;
+}
+
+#menu ul li a:hover{
+	background-color:#484848;
+	color:#fff;
+	
+}
+
+#menu-2{
+	background-color:#dfdfdf;
+	height:29px;
+}
+
+#menu-2 ul{
+	margin:0; padding:0;
+}
+
+#menu-2 ul li{
+	display:inline-block;
+	height:27px;
+	float:left;
+	text-align:center;
+	padding-top:2px;
+	
+}
+
+#menu-2 ul li a{
+	display:block;
+	border-right:2px solid #efefef;
+	font-weight:bold;
+	color:#333;
+	padding:0 8px;
+}
+
+#menu-2 ul li a:hover{
+	background-color:#484848;
+	color:#fff;
+	
+}
+
+#conteudo .login-box{
+	margin:138px auto;
+	width:409px;
+	height:236px;
+	background-color:#fff
+}
+
+#conteudo .login-box h2{
+	margin:0 8px;
+	padding:5px 0 3px;
+	border-bottom:4px solid #ccc;
+	font-size:113%;
+
+}
+#conteudo .login-form{
+	margin:0 8px;
+	padding:5px 0 3px;	
+}
+
+#conteudo .login-form label{
+	font-weight:bold;
+	color:#0066cc;
+}
+
+.alerta{
+	color:red;
+	font-weight:bold;
+}
+.aviso{
+	color:#2E8B57;
+	font-weight:bold;
+}
+
+.hidden, #hidden{
+display:none
+}
+
+.separator{
+border-bottom:1px dashed #888;
+padding:2px 0 8px 8px;
+clear:both;
+}
+
+.second{
+	border-top:6px solid #cd4826
+}
+
+.second ul li{
+	background: #dfdfdf url("../images/icon_down.gif") no-repeat 5px 6px;
+}
+
+.second ul li a{
+	margin-left:25px;
+	display:block;
+}
+
+#conteudo .content{
+background-color:#fff;
+margin:20px 0 0;
+}
+
+#conteudo .inner-content{
+	margin:10px;
+}
+
+#conteudo .inner-content h2{
+	padding:10px 0 2px;
+	border-bottom:4px solid #CCC
+}
+
+#conteudo .inner-content h2 em{
+	font-size:70%;
+	color:#333;
+	float:right;
+	margin-right:36px
+
+}
+
+#simple-table{
+	margin:20px;
+}
+
+#simple-table table.borda-simples{
+	border-collapse: collapse;
+}
+#simple-table table.borda-simples tr th,td{
+	border:1px solid #CCC;
+}
+
+#simple-table table.borda-simples tr th{
+	background-color:#F0FFFF;
+}
+
+#simple-table table.borda-simples tfoot{
+	border-top:1px solid #333;
+	margin-top:15px;
+
+}
+
+h4 em{
+	margin-left: 25px;
+	font-size:90%;
+	color:navy;
+}
+
+.prosseguir{
+	float:right;
+}
+
+#simple-form input,#simple-form select{
+
+	background-color:#fff;
+	padding: 3px 4px;
+	font-size:112%;
+}
+
+#simple-form fieldset{
+	border:1px solid #afafaf;
+}
+
+#simple-form fieldset legend{
+	color:#4876FF;
+	font-weight:bold;
+}
+
+#simple-form fieldset legend em{
+	margin-left:15px;
+	color:black;
+	font-size:89%;
+	font-weight:normal;
+}
+
+#simple-form{
+	margin: 20px auto;
+	width:819px
+}
+
+.submitter{
+	margin:15px auto;
+	width:769px;
+	text-align:center;
+}
+
+#central-options{
+	text-align:center;
+}
+
+#central-options h4{
+	padding:0;
+	margin:0;
+}
+
+button{
+	background-color:#fff;
+	color:#0066cc;
+	padding: 3px 4px;
+	font-size:152%;
+	font-weight:bold;
+}
+
+.left-content{
+	margin-right:457px
+}
+
+.right-subcontent{
+	float:right;
+	width:450px;
+	padding-right:15px;
+}
+
+.right-subcontent h3{
+	margin-top:0
+}
+
+.right-content{
+	float:right;
+	width:860px;
+}
+
+.left-subcontent{
+	margin-right:867px;
+}
+
+.left-subcontent h3{
+	margin-top:0
+}
+
+.tabela{
+	border-collapse: collapse;
+}
+.tabela thead th,.tabela tbody th{
+	background-color:#f0ffff;
+	border:1px solid #cfcfcf;
+	padding:4px;
+}
+
+.tabela tbody tr td{
+	padding:4px 8px;
+}
+
+.tabela th.th-nao-editavel{
+	background-color:#F08080;
+
+}
+
+.empcor-azul{
+color:blue;
+font-weight:bold
+}
+
+.empcor-vermelho{
+color:red;
+font-weight:bold
+}
+
+h3.click-topic{
+	background: url("../images/icon_down.gif") no-repeat 5px 6px;
+	padding-left:25px;
+}
+
+select:disabled,input:disabled{color:#777;font-weight:bold}
+
+.uo-chart{
+	float:left;
+	width:48%;
+	margin:4px;
+	height:320px;
+	border: 1px dashed #ccc;
+}
+
+#area-chart-container{
+	width:100%;
+	overflow-x:scroll;
+	overflow-y:hidden;
+}
+
+#area-chart-container .area-chart{
+	width:2400px;
+	height:400px;
+}
+
+.uo-area-chart{
+	height:300px;
+}
+
+.button{
+	background-color:#fff;
+	color:#0066cc;
+	padding: 2px 4px;
+	font-size:122%;
+	font-weight:bold;
+	margin:0;
+}
+
+.rel_notas-form{
+	width: 950px;
+	margin: 10px auto;
+}
+
+.floating-radio{
+	display:block;
+	width:24%;
+	float:left;
+}
+
+.tip-box{
+	display: none;
+	background-color:#deedff;
+	border: 1px solid #ddd;
+	padding:8px;
+	position:absolute;
+}
+
+.tipBoxTable{
+	background-color:#fff;
+
+}
+
+.side-list{margin:0;padding:0}
+.side-list li{
+	list-style-type:none;
+	display:inline-block;
+	width:8.1%;
+	float:left;
+	text-align:center;
+	background-color:#ddd;
+	border:1px solid #fff;
+}
+
+.resumo-bar{
+	padding: 9px 7px;
+	background-color:#B0E2FF;
+	color:#1f1f1f;
+}
+
+.inativo{ color: red}
+.ativo{ color: green}
+
+/************** RELATÓRIOS PDF ****************/
+
+ul.ano-block{
+	display:block;
+	margin:0;
+	padding:0;
+	width:12%;
+	float:left;
+}
+ul.ano-block li{
+	display:block;
+}
+ul.ano-block li a{
+	display:block;
+	padding-left: 7px;
+}
+ul.ano-block li a:hover{
+	background-color:#ccc;
+}

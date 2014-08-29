@@ -1,0 +1,49 @@
+<div class="content">
+	<div class="inner-content">
+		<h2>Cadastrar Unidade Operacional</h2>
+		<ul>
+			<li>Os campos marcados com * devem ser preenchidos obrigatoriamente.</li>
+		</ul>
+		<div id="simple-form">
+			<div class="alerta">
+				{ALERTA}
+			</div>
+			<div class="aviso">
+				{AVISO}
+			</div>
+			<form name="addUnidade" method="post" action="ger_addUnidade.php?form=uo">
+				<fieldset>
+					<legend>Nome *</legend>
+					<input type="text" name="nome" /> 
+				</fieldset>
+				<fieldset>
+					<legend>Sigla *<em>Nome simplificado</em></legend>
+					<input type="text" name="sigla" maxlength="6" />
+				</fieldset>
+				<fieldset>
+					<legend>Endereço * / Número</legend>
+					<input type="text" name="endereco" /> <input type="text" name="numero" />
+				</fieldset>			
+				<fieldset>
+					<legend>Cidade *</legend>
+					<select name="cidade">
+						<option value="5270">São Paulo</option>
+						<!-- BEGIN EACH_CIDADE -->
+						<option value="{CIDID}">{CIDNOME}</option>
+						<!-- END EACH_CIDADE -->
+					</select>	
+				</fieldset>
+				<fieldset>
+					<legend>Latitude e Longitude <em>Informações do Google Maps</em></legend>
+					<input type="text" name="lat" /> <small>Latitude</small> <br />
+					<input type="text" name="long" /> <small>Longitude</small>
+				</fieldset>
+				<div class="submitter">
+					<input type="submit" value="Enviar" />
+					<input type="reset" value="Resetar" />
+				</div>
+			</form>
+		</div>
+	</div>
+	</br>
+</div>

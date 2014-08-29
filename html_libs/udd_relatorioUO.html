@@ -1,0 +1,81 @@
+<div class="content">
+	<div class="inner-content">
+		<h2>Relatório de Gastos de Unidades Operacionais</h2>
+		<ul>
+			<li>Clique na UO para ver o relatório Mês a Mês de pagamentos.</li>
+		</ul>
+		<div id="simple-table" class="separator">
+			<h3>UOs do DAEE</h3>
+			<table class="borda-simples" width="100%">
+				<tr>
+					<th width="2%" rowspan="2">
+						UO
+					</th>
+					<th width="6%" rowspan="2">
+						SIGLA
+					</th>
+					<th rowspan="2">
+						NOME
+					</th>					
+					<!--th rowspan="2">
+						ENDEREÇO
+					</th-->
+					<th rowspan="2">QUANT. UCS</th>
+					<th width="10%" colspan="{DISTINCT_TYPE}" style="background-color:#E6E6FA">
+						VALOR PAGO EM {ANO}
+					</th>
+					<th width="10%" rowspan="2">
+						TOTAL PAGO <br />{ANO}
+					</th>
+				</tr>
+				<tr>
+					<!-- BEGIN EACH_DISTINCT -->
+					<th width="8%" style="background-color:#E6E6FA">
+						<small>{DISTINCT_NOME}</small>
+					</th>
+					<!-- END EACH_DISTINCT -->
+				</tr>				
+				<tbody>
+					<!-- BEGIN EACH_UO -->
+					<tr>	
+						<td align="center">{UOID}</td>
+						<td><a href="udd_uoDetalhes.php?chave={UOKEY}">{UOSIGLA}</a></td>
+						<td><a href="udd_uoDetalhes.php?chave={UOKEY}">{UONOME}</a></td>
+						<!--td>{UOEND}, {UOCIDADE}</td-->
+						<td align="center">{UCQTD}</td>
+						<!-- BEGIN EACH_TIPOVALOR -->
+						<td align="center" style="background-color:#fafafa">{TIPOVALOR}</td>
+						<!-- END EACH_TIPOVALOR -->
+						<td align="center"><b>{UOTOTAL}</b></td>
+					<tr>
+					<!-- END EACH_UO -->
+				</tbody>
+				<tr>
+					<td height="15"></td>
+				</tr>
+				<tfoot>
+					<tr>
+						<td colspan="3"><h4>TOTAL GERAL</h4></td>
+						<td align="center">{UCTOTAL}</td>
+						<!-- BEGIN EACH_TIPOTOTAL -->
+						<td align="center" style="background-color:#fafafa"><b>{TIPOTOTAL}</b></td>
+						<!-- END EACH_TIPOTOTAL -->
+						<td align="center"><h4>{TOTALPAGO}</h4></td>
+					</tr>
+				</tfoot>
+			</table>	
+		</div>
+		<div id="simple-table" class="separator">
+		<h3>Gráficos de Gastos</h3>
+		
+		<!-- BEGIN CHART_DIVS -->
+			<div class="uo-chart" id="chart_div{CHART_INDEX}">
+			{TESTE}
+			</div>
+		<!-- END CHART_DIVS -->
+		<br style="clear:both" />
+		</div>
+		
+	</div>
+	</br>
+</div>

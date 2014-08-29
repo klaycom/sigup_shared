@@ -1,0 +1,106 @@
+<div class="content">
+	<div class="inner-content">
+		<h2>Lançamento de Conta</h2>
+		<ul>
+			<li>Os campos marcados com * devem ser preenchidos obrigatoriamente.</li>
+			<li>Marque a opção <b>manter dado</b> para manter os dados informados para os próximos lançamentos.</li>
+		</ul>
+		<div id="simple-form">
+			<div class="alerta">
+				{ALERTA}
+			</div>
+			<div class="aviso">
+				{AVISO}
+			</div>
+			<form name="addNota" method="post" action="ope_lancamento.php"id="lanc-form">
+				<fieldset>
+					<legend>Registro da Unidade Consumidora *</legend>
+					<select name="rgi" {DISABLE_RGI}> 
+						<!-- BEGIN EACH_OPTGROUP -->
+							<optgroup label="{CONTNOME}">
+							<!-- BEGIN EACH_RGI -->
+							<option value="{RGID}" {DISABLE_OPT}>{RGI} - {RGINOME}</option>
+							<!-- END EACH_RGI -->
+							</optgroup>
+						<!-- END EACH_OPTGROUP -->
+						<input type="hidden" name="hide-rgi" value="{HIDERGID}" />
+					</select>
+					<div id="combo"></div>
+				</fieldset>
+				<fieldset>
+					<legend>Número da Nota * e complemento</legend>
+					<input type="text" name="nota" value="{NOTAVAL}" maxlength="20" /> <small>Complemento :</small><input type="text" name="compl" value="{COMPLVAL}" maxlength="20" />
+				</fieldset>		
+				<fieldset>
+					<legend>Mês de Referência * e outras datas <em>dd/mm/aaaa</em></legend>
+					
+					<table width="80%">
+						<tr>
+							<td width="18%">Referência*:</td>
+							<td width="45%">
+								<select name="mes_ref" class="data_ref" {DISABLE_DATAREF}>
+									<!-- BEGIN EACH_MESREF -->
+										<option value="{MES}">{MESNOME}</option>
+									<!-- END EACH_MESREF -->
+								</select>
+								<select name="ano_ref" class="data_ref" {DISABLE_DATAREF}>
+									<!-- BEGIN EACH_ANOREF -->
+										<option value="{ANO}">{ANO}</option>
+									<!-- END EACH_ANOREF -->
+								</select>
+								<input type="hidden" name="hide-mes_ref" value="{HIDEMESREF}" />
+							</td>
+							<td><input type="checkbox" name="mantem-data_ref" id="mantem-data_ref" class="mantem-select" {CHECKED_DATA} /><label for="mantem-data_ref">manter mês de referência</label></td>
+						</tr>
+						<tr>
+							<td>Emissão*:</td>
+							<td><input type="text" value="{EMISSAO}" name="emissao" class="emissao" maxlength="10" size="10" {DISABLE_EMIS} /></td>
+							<td><input type="checkbox" name="mantem-emissao" id="mantem-emissao" class="mantem-text" {EMISCHK} /><label for="mantem-emissao">manter data de emissão</label></td>						</tr>
+						<tr>
+							<td>Vencimento*:</td>
+							<td><input type="text" value="{VENCTO}" name="vencto" class="vencto" maxlength="10" size="10" {DISABLE_VENC} /></td>
+							<td><input type="checkbox" name="mantem-vencto" id="mantem-vencto" class="mantem-text" {VENCCHK} /><label for="mantem-vencto">manter data de vencimento</label></td>
+						</tr>
+						<tr>
+							<td>Saída ADA:</td>
+							<td><input type="text" value="{SAIDA}" name="saida" class="saida" maxlength="10" size="10" {DISABLE_SAID} /></td>
+							<td><input type="checkbox" name="mantem-saida" id="mantem-saida" class="mantem-text" {SAIDACHK} /><label for="mantem-saida">manter data de saída</label></td>
+						</tr>
+					</table>
+				</fieldset>			
+				<fieldset>
+					<legend>Consumo e Valor *</legend>
+					Consumo: <input type="text" value="{CONSVAL}" name="consumo" />{TIPOCONS}
+					<br />
+					Valor*: R$ <input type="text" value="{VALORVAL}" name="valor" />
+				</fieldset>
+				<fieldset>
+					<legend>Autuação</legend>
+					<table width="80%">
+						<tr>
+							<td width="18%">Provisória:</td>
+							<td width="45%"><input type="text" value="{PROVISORIA}" name="prov" class="prov" size="10" {DISABLE_PROV} /></td>
+							<td><input type="checkbox" name="mantem-prov" id="mantem-prov" class="mantem-text" {PROVCHK} /><label for="mantem-prov">manter número de provisória</label></td>
+						</tr>
+					</table>
+				</fieldset>
+				<fieldset>
+					<legend>Observações referentes à Nota</legend>
+					<table width="80%">
+						<tr>
+							<td width="18%" valign="top">Obs:</td>
+							<td width="77%"><textarea name="obs" cols="50" rows="7" >{OBS}</textarea></td>
+							
+						</tr>
+					</table>
+				</fieldset>				
+				<div class="submitter">
+					<input type="submit" value="Enviar" id="submitButton" />
+					<input type="reset" value="Resetar" />
+				</div>
+			</form>
+		</div>
+	</div>
+	<input type="hidden" id="hidden-val" />
+	</br>
+</div>

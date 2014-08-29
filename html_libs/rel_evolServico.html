@@ -1,0 +1,30 @@
+<div class="content">
+	<div class="inner-content">
+		<h2>Evolução Financeira DAEE</h2>
+		
+		<div class="separator">
+			<h3>Clique no tipo de relatório que deseja consultar:</h3>
+			<ul>
+				<li><a href="rel_evolServico.php"><b>Comparativo entre cada tipo de serviço</b></a></li>
+				<li><a href="rel_evolServico.php?servico=All"><b>Agregado de todos os serviços</b></a></li>
+				<!-- BEGIN EACH_TIPOSERV -->
+				<li><a href="rel_evolServico.php?servico={TIPOID}"><b>Somente {TIPONOME}</b></a></li>
+				<!-- END EACH_TIPOSERV -->
+				<!--li>Os meses marcados com * podem não ter todas as notas lançadas corretamente.</li-->
+			</ul>
+		</div>
+		<div class="separator">
+			<!-- BEGIN AREA_CHART -->
+			<h3>{TITULO_EVO} nos últimos 2 anos</h3>
+			<div id="area-chart-container">
+				<div class="area-chart" id="area-chart">
+					
+				
+				</div>
+			</div>
+			<!-- END AREA_CHART -->
+		</div>
+		<br style="clear:both" />
+	</div>
+	</br>
+</div>

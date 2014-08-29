@@ -1,0 +1,75 @@
+<div class="content">
+	<div class="inner-content">
+		<h2>Relatório de Gastos de Unidades Consumidoras</h2>
+		<ul>
+		<!-- BEGIN EACH_TIPOBUTTON -->
+			<li style="list-style-type:square"><a href="udd_relatorioUC.php?tipo={TIPO_ID}">{TIPO_NOME}</a></li>
+		<!-- END EACH_TIPOBUTTON -->		
+			<li style="list-style-type:none">Clique na UC para ver o relatório Mês a Mês de pagamentos.</li>
+		</ul>
+		<div id="simple-table">
+			<!-- BEGIN EACH_TIPO -->
+			
+			<h3>UCs de {TIPO_NOME}</h3>
+			<table class="borda-simples" width="100%">
+				<tr>
+					<th width="6%">
+						IDENTIFICADOR
+					</th>
+					<th>
+						NOME
+					</th>
+					<th width="9%">
+						STATUS
+					</th>
+					<th>
+						ENDEREÇO
+					</th>						
+					<th>
+						MUNICÍPIO
+					</th>					
+					<th>
+						UO
+					</th>
+					<th width="8%">
+						EMPRESA
+					</th>
+					<th width="8%" style="background-color:#E6E6FA">
+						CONSUMO<br /> EM {ANO} <br />({MEDIDA})
+					</th>
+					<th width="8%" style="background-color:#E6E6FA">
+						VALOR PAGO<BR />EM {ANO} <br />(R$)
+					</th>
+				</tr>
+				
+				<!-- BEGIN EACH_UC -->
+				<tr>	
+					<td height="55"><a href="udd_ucDetalhes.php?chave={UCCHAVE}">{UCRGI}</a></td>
+					<td><a href="udd_ucDetalhes.php?chave={UCCHAVE}">{UCNOME}</a></td>
+					<td align="center">{STATUS}</td>					
+					<td>{UCEND}</td>
+					<td>{UCCID}</td>
+					<td align="center">{UCSIGLA}</td>
+					<td align="center">{EMPRESA}</td>
+					<td align="center" style="background-color:#fafafa">{CONSANO}</td>
+					<td align="center" style="background-color:#fafafa">{VALANO}</td>					
+				</tr>
+				<!-- END EACH_UC -->
+				<tr>
+					<td height="15"></td>
+				</tr>
+				
+				<tfoot>
+					<tr>
+						<td colspan="7"><h4>TOTAL GERAL:  {TIPO_NOME}<em>Quantidade de UCS: {UCQTD}</em></h4></td>
+						<td align="center" style="background-color:#fafafa"><b>{SOMACONSANO}</b></td>
+						<td align="center" style="background-color:#fafafa"><b>{SOMAPAGOANO}</b></td>
+					</tr>
+				</tfoot>
+			</table>
+			
+			<!-- END EACH_TIPO -->
+		</div>
+	</div>
+	</br>
+</div>

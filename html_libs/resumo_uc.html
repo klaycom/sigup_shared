@@ -1,0 +1,134 @@
+<div class="content">
+	<div class="inner-content">
+		<h2>Unidade Consumidora - <span style="color:{UCCOLOR}">{RGI}</span> de {TIPONOME}</h2>
+		
+		<div class="right-subcontent">
+			<h3>Histórico de {ANO}:</h3>
+			<table width="100%" class="tabela">
+				<thead>
+					<tr>
+						<td rowspan="2"></td>
+						<th colspan="3">PAGAMENTOS {ANO}</th>
+					</tr>
+					<tr>
+						<th>CONS. ({TIPOCONS})</th>
+						<th>VALOR</th>
+						<th>VARIAÇÃO R$</th>
+					</tr>
+				<thead>
+				<tbody>
+					<!-- BEGIN EACH_MENSAL -->
+					<tr>
+						<th>{MESSOMA}</th>
+						<td align="center">{CONSSOMA}</td>
+						<td align="right">{PAGOSOMA}</td>
+						<td align="center">{VARIASOMA}</td>
+					</tr>
+					<!-- END EACH_MENSAL -->	
+					<tr>
+						<td colspan="4" height="5"></td>
+					</tr>
+				</tbody>
+				<tfoot>
+					<tr>
+						<th>TOTAL</th>
+						<td align="center"><b>{CONSTOTAL}</b></td>
+						<td align="right"><b>{PAGOTOTAL}</b></td>
+						<td align="right"></td>
+					</tr>				
+				<tfoot>
+			</table>
+		</div>
+		<div class="left-content">
+			<h3>Informações:</h3>
+			<ul>
+				<li><b>RGI/INSTALAÇÃO/NÚMERO:</b> {RGI}</li>
+				<li><b>Nome Cadastrado:</b> {NOME}</li>
+				<li><b>Tipo de Conta:</b> {TIPONOME}</li>
+				<li><b>Empresa:</b> {EMPRESA}</li>
+				<li><b>Endereço:</b> {ENDERECO}</li>
+				<li><b>Autos/Processo:</b> {CONTRATO}</li>
+				<li><b>Unidade:</b> {UNIDADE}</li>
+				<li><b>Média de {ANO}:</b> R$ {MEDIA} p/ mês</li>
+				
+				<!--li><b>Variação do último mês sobre média:</b> {AUMENTO}</li-->
+			</ul>
+			<br />
+			<center><a href="resumo_index.php?ano={ANO}"><img src="images/back_button.jpg"/></a></center>
+		</div>
+		<div id="simple-table" style="clear:both">
+			<!-- BEGIN CONSUMOANALITICO -->
+			<h3>Relatório Analítico de Consumo</h3>
+			<div class="separator">
+				<div class="right-content" id="chart_div" style="height:500px">
+				
+				</div>	
+				<div class="left-subcontent">
+					<table class="tabela" width="100%">
+						<thead>
+							<tr>
+								<th rowspan="2" width="10%"></th>
+								<th colspan="2" width="60%">CONSUMO ({TIPOCONS})</th>
+								<th rowspan="2" width="30%">VARIAÇÃO <br /> {ANO_ANT} - {ANO}</th>
+							</tr>
+							<tr>
+								<th width="30%">{ANO_ANT}</th>
+								<th width="30%">{ANO}</th>
+							</tr>
+						</thead>
+						<tbody>
+							<!-- BEGIN EACH_CONSANALITICO -->
+							<tr>
+								<th>{MESANALITICO}</th>
+								<td align="center">{CONSANT}</td>
+								<td align="center">{CONSPOST}</td>
+								<td align="center"><b>{CONSVARIA}</b></td>
+							</tr>
+							<!-- END EACH_CONSANALITICO -->
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<!-- END CONSUMOANALITICO -->
+			<h3>Relatório Analítico em Reais</h3>
+			<div class="separator">
+				<div class="right-content" id="chart_div2" style="height:500px">
+				
+				</div>		
+				<div class="left-subcontent">
+					<table class="tabela" width="100%">
+						<thead>
+							<tr>
+								<th rowspan="2" width="10%"></th>
+								<th colspan="2" width="60%">CONSUMO (R$)</th>
+								<th rowspan="2" width="30%">VARIAÇÃO <br /> {ANO_ANT} - {ANO}</th>
+							</tr>
+							<tr>
+								<th width="30%">{ANO_ANT}</th>
+								<th width="30%">{ANO}</th>
+							</tr>
+						</thead>
+						<tbody>
+							<!-- BEGIN EACH_PAGOANALITICO -->
+							<tr>
+								<th>{MESANALITICO}</th>
+								<td align="center">{PAGOANT}&nbsp;&nbsp;&nbsp;</td>
+								<td align="center">{PAGOPOST}&nbsp;&nbsp;&nbsp;</td>
+								<td align="center"><b>{PAGOVARIA}</b></td>
+							</tr>
+							<!-- END EACH_PAGOANALITICO -->
+						</tbody>						
+					</table>
+				</div>
+			</div>			
+		</div>
+		<center>
+			<input type="button" value="Mostrar Resumo Geral" id="show-resumo">
+		</center>
+		<div id="resumo-container">	
+		</div>			
+		<br style="clear:both" />
+		<br />
+	</div>
+	</br>
+</div>

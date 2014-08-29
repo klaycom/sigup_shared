@@ -1,0 +1,75 @@
+<script type="text/javascript">
+	
+$(document).ready(function(){
+
+	$('.button').click(function(){
+	
+		var dataPagto	= $('input[name=data]').val();
+		var thisID		= $(this).attr('name');
+		
+		if(dataPagto == ""){
+		
+			alert('Digite uma data de pagamento no campo acima!');
+			$('input[name=data]').focus();
+		
+		}else if(!validDate(dataPagto)){
+		
+			alert('A data fornecida não é uma data válida. Formato: dd/mm/aaaa');
+		
+		}else{
+		
+			//alert(thisID);
+			$.post("actions.php", {action:"marcarPago", nid: thisID, data:dataPagto}, function(data){
+				
+				$('.td-container-' + thisID).html(data);
+				
+			});
+		
+		}
+	
+	});
+});	
+
+function validLength(variavel, min, max){
+	if(variavel != ""){
+		if(variavel.length <= max && variavel.length >= min)
+			return true;
+		else
+			return false;
+	}else{
+		return false;
+	}
+
+}
+
+function validDate(data){
+	if(data.length == 10){
+		var splitted = data.split('/');
+		var invalid = 0;
+		if(splitted.length == 3){
+			var dia = splitted[0];
+			var mes = splitted[1];
+			var ano = splitted[2];
+			if(mes <= 0 || mes > 12)
+				invalid++;
+			if(dia <= 0 || dia > 31)
+				invalid++;			
+			if(dia == 31 && (mes == 1 || mes == 3 || mes == 5 || mes == 7 || mes == 8 || mes == 10 || mes == 12))
+				invalid++;
+			if(dia > 29 && mes == 2)
+				invalid++;
+			if(ano < 2000)
+				invalid++;
+			if(invalid > 0)
+				return false;
+			else
+				return true;
+		}else
+			return false;
+	}else
+		return false;
+}
+
+
+
+</script>

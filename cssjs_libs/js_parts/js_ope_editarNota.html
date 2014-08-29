@@ -1,0 +1,196 @@
+<script type="text/javascript">
+	
+$(document).ready(function(){
+
+	$('.button').click(function(){
+	
+		var thisID		= $(this).attr('name');
+		document.location.href= thisID;
+			
+	});
+	
+	/*****************************
+	 MOSTRAR FORMULARIO DE EDIÇÃO
+	*****************************/
+	$('select[name=editar]').change(function(){
+
+		var campo = $(this).val();
+		if(campo == ""){
+		
+			$('.hidden').hide();
+		
+		}else{
+		
+			$('.hidden').hide();
+			$('#' + campo).show();
+		
+		}
+	
+	});
+	
+	$('input[type=text]').focus(function(){
+	
+		var title	= $(this).attr('title');
+		var valor	= $(this).val();
+		
+		if(title == valor){
+		
+			$(this).val("");
+		
+		}
+	
+	});
+	
+	/*****************************
+	 VALIDAR DADOS ANTES DE ENVIAR
+	*****************************/
+	$('#submitButton').click(function(){
+	
+		var switcher = $('select[name=editar]').val();
+		var invalid  = 0;
+		var alerta	 = "";
+		
+		if(switcher == ""){
+		
+			$('.alerta').html("Preencha o formulário adequadamente.");
+			$('.aviso').html("");
+			return false;
+		
+		}else if($('textarea[name=obs]').val() == ""){
+		
+			$('.alerta').html("Preencha a justificativa de edição.");
+			$('.aviso').html("");
+			return false;		
+		
+		}else{
+			
+			switch(switcher){
+				
+				case "emissao":
+				case "vencto":
+				case "saida":
+				
+					var data = $('#' + switcher).val();
+					if(!validLength(data, 10,10)){
+					
+						invalid++;
+						alerta += "<br />- Digite uma data válida.<br />";
+					
+					}else if(!validDate(data)){
+					
+						invalid++;
+						alerta += "<br />- Formato de Data Inválida.<br />";
+					
+					}
+				
+				break;
+				case "provisoria":
+				
+					var prov  = $('#' + switcher).val();
+					if(prov <= 0 || isNaN(prov) ){
+					
+						invalid++;
+						alerta += "<br />- Número de Provisória inválido.<br />";
+					
+					}
+				
+				break;
+				case "consumo":
+				
+					var prov  = $('#' + switcher).val();
+					if(prov <= 0 || isNaN(prov) ){
+					
+						invalid++;
+						alerta += "<br />- Consumo digitado inválido.<br />";
+					
+					}
+				
+				break;
+				case "valor":
+				
+					var prov  = $('#' + switcher).val();
+					if(prov <= 0 || isNaN(prov) ){
+					
+						invalid++;
+						alerta += "<br />- Valor digitado inválido.";
+					
+					}
+				
+				break;				
+				case "numero":
+				
+					var prov  = $('#' + switcher).val();
+					if(prov == ""){
+					
+						invalid++;
+						alerta += "<br />- Número digitado inválido.";
+					
+					}
+				
+				break;					
+			
+			}
+			
+			if(invalid > 0){
+				
+				$('.alerta').html("Erro ao enviar formulário: " + alerta);
+				$('.aviso').html("");
+				return false;
+			
+			}else{
+			
+				return true;
+			
+			}
+		
+		}
+		
+		
+	
+	});
+	
+});	
+
+function validLength(variavel, min, max){
+	if(variavel != ""){
+		if(variavel.length <= max && variavel.length >= min)
+			return true;
+		else
+			return false;
+	}else{
+		return false;
+	}
+
+}
+
+function validDate(data){
+	if(data.length == 10){
+		var splitted = data.split('/');
+		var invalid = 0;
+		if(splitted.length == 3){
+			var dia = splitted[0];
+			var mes = splitted[1];
+			var ano = splitted[2];
+			if(mes <= 0 || mes > 12)
+				invalid++;
+			if(dia <= 0 || dia > 31)
+				invalid++;			
+			if(dia == 31 && (mes == 1 || mes == 3 || mes == 5 || mes == 7 || mes == 8 || mes == 10 || mes == 12))
+				invalid++;
+			if(dia > 29 && mes == 2)
+				invalid++;
+			if(ano < 2000)
+				invalid++;
+			if(invalid > 0)
+				return false;
+			else
+				return true;
+		}else
+			return false;
+	}else
+		return false;
+}
+
+
+
+</script>

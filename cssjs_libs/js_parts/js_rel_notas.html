@@ -1,0 +1,28 @@
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+		
+$(document).ready(function(){
+
+	var mouseX;
+	var mouseY;
+	$(document).mousemove( function(e) {
+	   mouseX = e.pageX; 
+	   mouseY = e.pageY;
+	});
+	$(".show-tip-box").mouseover(function(){
+		
+		var divToShow = $(this).attr('name');
+		$('#'+divToShow).css({'top':mouseY,'left':mouseX});
+		$('#'+divToShow).show();
+	 
+	});
+	
+	$(".show-tip-box").mouseout(function(){
+		
+		$('.tip-box').hide();
+	 
+	});	
+
+});		
+
+    </script>

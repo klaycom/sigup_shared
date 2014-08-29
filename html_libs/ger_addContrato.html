@@ -1,0 +1,59 @@
+<div class="content">
+	<div class="inner-content">
+		<h2>Cadastrar Novo Autos Processo</h2>
+		<ul>
+			<li>Antes de cadastrar um novo Autos/Processo, verifique abaixo se o mesmo já se encontra cadastrado no sistema.</li>
+		</ul>
+
+		<div id="simple-table">
+			<div class="prosseguir">
+				<a href="ger_addContrato.php?form">prosseguir ao formulário de cadastro >></a>
+			</div>		
+			<table class="borda-simples" width="100%">
+				<tr>
+					<th>
+						ID
+					</th>
+					<th>
+						TÍTULO
+					</th>					
+					<th>
+						UDD
+					</th>
+					<th>
+						CONTRATO
+					</th>
+					<th>
+						EMPRESA
+					</th>
+					<th>
+						LICITAÇÃO
+					</th>
+					<th>
+						VIGÊNCIA
+					</th>
+					<th>
+						CADASTRADO EM
+					</th>
+				</tr>
+				
+				<!-- BEGIN EACH_CONTRATO -->
+				<tr>	
+					<td align="center">{CONTID}</td>
+					<td>{CONTNOME}</td>
+					<td align="center">{CONTUDD}</td>
+					<td align="center">{CONTCONT}</td>
+					<td>{CONTEMP}</td>
+					<td align="center">{CONTLICIT}</td>
+					<td>{CONTVIG}</td>
+					<td>{CONTEM}</td>
+				<tr>
+				<!-- END EACH_CONTRATO -->
+			</table>
+			<div class="prosseguir">
+				<a href="ger_addContrato.php?form">prosseguir ao formulário de cadastro >></a>
+			</div>
+		</div>
+	</div>
+	</br>
+</div>

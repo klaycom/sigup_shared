@@ -1,0 +1,87 @@
+<div class="content">
+	<div class="inner-content">
+		<h2>Cadastrar Unidade Consumidora</h2>
+		<ul>
+			<li>Os campos marcados com * devem ser preenchidos obrigatoriamente.</li>
+		</ul>
+		<div id="simple-form">
+			<div class="alerta">
+				{ALERTA}
+			</div>
+			<div class="aviso">
+				{AVISO}
+			</div>
+			<form name="addUnidade" method="post" action="ger_addUnidade.php?form=uc">				
+				<fieldset>
+					<legend>Tipo de Consumo</legend>
+					<input type="radio" name="tipo" value="0" id="tipo-agua" /><label for="tipo-agua">Água e Esgoto (m³)</label><br />
+					<input type="radio" name="tipo" value="1" id="tipo-bt" /><label for="tipo-bt">Energia de Baixa Tensão (kW)</label><br />
+					<input type="radio" name="tipo" value="2" id="tipo-tel" /><label for="tipo-tel">Telefonia Fixa (Min)</label><br />
+					<input type="radio" name="tipo" value="3" id="tipo-gas" /><label for="tipo-gas">Gás (m³)</label><br />
+
+				</fieldset>
+				<fieldset>
+					<legend>RGI ou Instalação * / Data de Vencto de Fatura *</legend>
+					<input type="text" name="rgi" maxlength="50" />
+					<select name="vencto">
+						<!-- BEGIN EACH_DATA -->
+						<option value="{DIA}">{DIA}° de todo mês</option>
+						<!-- END EACH_DATA -->
+					</select>	
+				</fieldset>
+				<fieldset>
+					<legend>Empresa *</legend>
+					<select name="empresa">
+						<!-- BEGIN EACH_EMP -->
+						<option value="{EMPID}" {SELECTED2}>{EMPNOME} - CNPJ {CNPJ}</option>
+						<!-- END EACH_EMP -->
+					</select>	
+				</fieldset>				
+				<fieldset>
+					<legend>Autos||Processo do Contrato *</legend>
+					<select name="contrato">
+						<!-- BEGIN EACH_CON -->
+						<option value="{CONID}" {SELECTED1}>{CONNOME}</option>
+						<!-- END EACH_CON -->
+					</select>	
+				</fieldset>
+				<fieldset>
+					<legend>Nome<em>Para facilitar identificação</em></legend>
+					<input type="text" name="compl" />
+				</fieldset>					
+				<fieldset>
+					<legend>Endereço * / Número </legend>
+					<input type="text" name="end" /> n°:<input type="text" name="numero" maxlength="6" size="6" />
+				</fieldset>					
+				<fieldset>
+					<legend>Cidade *</legend>
+					<select name="cidade">
+						<option value="5270">São Paulo</option>
+						<!-- BEGIN EACH_CIDADE -->
+						<option value="{CIDID}">{CIDNOME}</option>
+						<!-- END EACH_CIDADE -->
+					</select>	
+				</fieldset>
+				<fieldset>
+					<legend>Unidade Operacional *</legend>
+					<select name="unidade">
+						<!-- BEGIN EACH_UDD -->
+						<option value="{UDDID}">{UDDSIGLA} - {UDDNOME}</option>
+						<!-- END EACH_UDD -->
+					</select>	
+				</fieldset>				
+				<fieldset>
+					<legend>Latitude e Longitude <em>Informações do Google Maps</em></legend>
+					<input type="text" name="lat" /> <small>Latitude</small> <br />
+					<input type="text" name="long" /> <small>Longitude</small>
+				</fieldset>
+				<div class="submitter">
+					<input type="submit" value="Enviar" />
+					<input type="reset" value="Resetar" />
+				</div>
+			</form>
+		</div>
+	</div>
+	</br>
+</div>
+

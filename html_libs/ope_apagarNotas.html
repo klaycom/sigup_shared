@@ -1,0 +1,57 @@
+<div class="content">
+	<div class="inner-content">
+		<h2>Apagar Notas</h2>
+		<p><b>Notas marcadas como não pagas, emitidas no(s) último(s) {PERIODO} mês(es)</b>:</p>
+		
+		<!-- BEGIN EACH_CONTRATO -->
+		<div class="separator">
+			<h3>{AUTOS}</h3>{SQL}
+			<div class="simple-table">
+				<table class="tabela" width="100%">
+					<thead>
+						<tr>
+							<th>N° DA NOTA</th>
+							<th>UO</th>
+							<th>UC (RGI / INST / N°)</th>
+							<th>DATA REF.</th>
+							<th>EMPRESA</th>
+							<th>CONSUMO</th>
+							<th>VALOR</th>
+							<th>DATA DE<br />EMISSÃO</th>
+							<th>DATA DE<br />LANCTO.</th>
+							<th>LANÇADO<br />POR</th>
+							<th>APAGAR</th>
+						</tr>
+					</thead>			
+					<tbody>
+					<!-- BEGIN EACH_NOTAS -->
+						<tr>
+							<td align="center"><small>{NOTANUM}</small></td>
+							<td>{UO}</td>
+							<td><small>{UC}</small></td>	
+							<td align="center">{DATAREF}</td>
+							<td align="center"><small>{EMPRESA}</small></td>
+							<td align="right" style="border-left:1px solid #ccc">{CONSUMO}</td>
+							<td align="right" style="border-left:1px solid #ccc; border-right:1px solid #ccc">{VALOR}</td>
+							<td align="center"><small>{EMISSAO}</small></td>
+							<td align="center"><small>{LANCTO}</small></td>
+							<td align="center"><small>{LANCPOR}</small></td>
+							<td align="center">{APAGAR}apagar</td>
+						</tr>
+					<!-- END EACH_NOTAS -->
+					<!-- BEGIN SEM_NOTAS -->
+						<tr>
+							<td colspan="10" align="center"><i><b>Não há notas lançadas para este serviço neste período.</b></i></td>
+						</tr>
+					<!-- END SEM_NOTAS -->
+					</tbody>					
+				</table>
+				
+			</div>
+		</div>
+		<!-- END EACH_CONTRATO -->
+		</ul>
+		
+	</div>
+	</br>
+</div>

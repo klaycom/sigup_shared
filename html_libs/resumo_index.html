@@ -1,0 +1,43 @@
+<div class="content">
+	<div class="inner-content">
+		<h2>{UDD_NAME}</h2>
+		
+		<div class="resumo-bar">
+			<span class="prosseguir">[ <span class="ativo"><b>{QTD_ATIVO}</b> ativas</span> ]  [ <span class="inativo"><b>{QTD_INATIVO}</b> inativas</span> ]</span>
+			<b>Unidades Consumidoras de {UO_SIGLA}</b> <i>( Clique na UC para visualizar o relatório individual )</i>
+		</div>
+		<table class="tabela" width="100%">
+			<thead>
+				<tr>
+					<th  width="55%">UC (RGI / INST / N°)</th>
+					<th width="15%">TIPO</th>
+					<th width="10%">STATUS</th>
+					<th width="10%">CONSUMO</th>
+					<th width="10%">VALOR</th>
+				</tr>
+			</thead>			
+		</table>
+		<!-- BEGIN EACH_TIPO -->
+		<table style="width:100%; border-left:6px solid {BDCOLOR};margin:10px 0">
+
+			<!-- BEGIN EACH_UC -->
+			<tr>
+				<td style="padding:2px 0 0 5px" width="55%">
+					<a href="resumo_uc.php?chave={UCCHAVE}&ano={ANOATUAL}"><b style="color:{BDCOLOR}">{UCRGI}</b> - 
+					[<small> {UCNOME} </small>]</a>
+				</td>
+				<td width="15%"><small>{UCTIPO}</small></td>
+				<td width="10%" align="center"><small>{STATUS}</small></td>
+				<td width="10%" align="right">{CONSUMO}</td>
+				<td width="10%" align="right">{VALOR}</td>
+			</tr>
+			<!-- END EACH_UC -->
+			<tr>
+				<td colspan="3" width="80%"><b>TOTAL:  {UCTIPOIND} </b></td>
+				<td align="right" width="10%"><b>{TOTCONSUMO}</b></td>
+				<td align="right" width="10%"><b>{TOTVALOR}</b></td>
+			</tr>
+		</table>
+		<!-- END EACH_TIPO -->
+	</div>
+</div>

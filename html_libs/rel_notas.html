@@ -1,0 +1,201 @@
+<div class="content">
+	<div class="inner-content">
+		<h2>Relatório de Notas / Contas {TESTE}</h2>
+		<p><b>Aqui é possível acompanhar o lançamento de contas do sistema selecionando a data de referência das contas.</b></p>		
+
+		<div class="rel_notas-form">
+			<form action="rel_notas.php" method="post">
+				<center>
+				<h3>Escolha a data de referência</h3>
+
+				<select name="mes_ref">
+					<option value="">Mês (nulo)</option>
+					<option value="1">Janeiro</option>
+					<option value="2">Fevereiro</option>
+					<option value="3">Março</option>
+					<option value="4">Abril</option>
+					<option value="5">Maio</option>
+					<option value="6">Junho</option>
+					<option value="7">Julho</option>
+					<option value="8">Agosto</option>
+					<option value="9">Setembro</option>
+					<option value="10">Outubro</option>
+					<option value="11">Novembro</option>
+					<option value="12">Dezembro</option>
+					
+				</select>
+				<select name="ano_ref">
+					<!-- BEGIN EACH_ANOREF -->
+					<option value="{ANO_REF}">{ANO_REF}</option>
+					<!-- END EACH_ANOREF -->
+				</select>
+				<h3>Ordenar resultados por</h3>
+				</center>
+				<ul>
+					<li class="floating-radio">
+						<input type="radio" id="criado" name="order_by" value="n.criado" checked="checked" /><label for="criado">Data de lancto.</label>
+					</li>
+					<li class="floating-radio">
+						<input type="radio" id="emissao" name="order_by" value="n.emissao" /><label for="emissao">Data de emissão</label>
+					</li>
+					<li class="floating-radio">
+						<input type="radio" id="vencto" name="order_by" value="n.vencto" /><label for="vencto">Data de vencto.</label>
+					</li>
+					<li class="floating-radio">
+						<input type="radio" id="saida" name="order_by" value="n.saida" /><label for="saida">Data de saída da ADA</label>
+					</li>
+					<li class="floating-radio">
+						<input type="radio" id="pagto" name="order_by" value="n.pagto" /><label for="pagto">Data de pagto</label>
+					</li>
+					<li class="floating-radio">
+						<input type="radio" id="consumo" name="order_by" value="n.consumo" /><label for="consumo">Consumo</label>
+					</li>
+					<li class="floating-radio">
+						<input type="radio" id="valor" name="order_by" value="n.valor" /><label for="valor">Valor</label>
+					</li>					
+					<li class="floating-radio">
+						<input type="radio" id="tipo" name="order_by" value="c.tipo" /><label for="tipo">Tipo de Consumo</label>
+					</li>
+					<li class="floating-radio">
+						<input type="radio" id="contrato" name="order_by" value="n.contrato ASC, n.prov" /><label for="contrato">ID de Autos</label>
+					</li>					
+					<li class="floating-radio">
+						<input type="radio" id="uc" name="order_by" value="n.uc" /><label for="uc">ID de Unidade Consumidora</label>
+					</li>
+					<li class="floating-radio">
+						<input type="radio" id="usuario" name="order_by" value="n.usuario" /><label for="usuario">ID de Usuário</label>
+					</li>			
+					<li class="floating-radio">
+						<input type="radio" id="uo" name="order_by" value="c.uo" /><label for="uo">ID de Udd. Operacional</label>
+					</li>					
+
+				</ul>
+
+				<center style="clear:both">
+					<br />
+					<h3>Orientação</h3>
+					<select name="orientacao">
+						<option value="cresc">Crescente</option>
+						<option value="decre">Decrescente</option>
+					</select>
+					<br />
+					<h3>Filtrar por:</h3>
+					<select name="filter">
+						<option value="c.tipo >= 0">TODOS OS TIPOS DE CONSUMIDORA</option>
+						<!-- BEGIN FILTER_TIPO -->
+						<option value="{FILTER_QUERY}">{FILTER_NAME}</option>
+						<!-- END FILTER_TIPO -->
+					</select>
+					<br />
+					<h3>Data de Lançamento:</h3>
+					<select name="dia-lanc">
+						<option value="">Dia (nulo)</option>
+						<!-- BEGIN EACH_DIA --><option value="{DIANUM}">{DIANUM}</option><!-- END EACH_DIA -->
+					</select>
+					<select name="mes-lanc">
+						<option value="">Mês (nulo)</option>
+						<!-- BEGIN EACH_MES --><option value="{MESNUM}">{MESNOME}</option><!-- END EACH_MES -->
+					</select>					
+					<select name="ano-lanc">
+						<option value="">Ano (nulo)</option>
+						<!-- BEGIN EACH_ANO -->
+						<option value="{ANO_REF}">{ANO_REF}</option>
+						<!-- END EACH_ANO -->
+					</select>					
+					<input type="submit" value="Mostrar Notas">
+				</center>
+				
+			</form>
+			
+		</div>	
+
+		<!-- BEGIN RESULT_BLOCK -->
+		<div class="separator">
+			<h2>{NOTAQTD} NOTAS C/ MÊS DE REFERÊNCIA: {MESNOME} {ANO}</h2>
+			<h3>Ordenando por: {ORDERBY} {ORIENTATION}</h3>
+			{SQL}
+			<div class="simple-table">
+				<table class="tabela" width="100%">
+					<thead>
+						<tr>
+							<th></th>
+							<th>UO</th>
+							<th>UC (RGI / INST / N°)</th>
+							<th>EMISSÃO</th>
+							<th>VENCTO</th>
+							<th>SAIDA<br />ADA/DOF</th>
+							<th>PAGO EM</th>
+							<th>CONSUMO</th>
+							<th>VALOR</th>
+							<th>DATA DE<br />LANCTO</th>
+							<th>USUARIO</th>
+						</tr>
+					</thead>			
+					<tbody>
+					<!-- BEGIN EACH_NOTAS -->
+						<tr>
+							<td align="center" style="border-right:1px solid #ccc"><small>{INDEX}</small></td>
+							<td align="center" style="border-right:1px solid #ccc"><small><b>{UO}</b></small></td>
+							<td class="show-tip-box" name="{NOTAID}">{UC}
+								<div class="tip-box" id="{NOTAID}">
+									<table class="tipBoxTable">
+										<tr>
+											<td><b><small>Referência:</small></b></td>
+											<td>{MESREF}</td>
+										</tr>									
+										<tr>
+											<td><b><small>Número da Nota:</small></b></td>
+											<td>{NUMERO}</td>
+										</tr>										
+										<tr>
+											<td><b><small>Status de UC:</small></b></td>
+											<td>{STATUS}</td>
+										</tr>											
+										<tr>
+											<td><b><small>Autos/Processo:</small></b></td>
+											<td>{AUTOS}</td>
+										</tr>
+										<tr>
+											<td><b><small>Provisória:</small></b></td>
+											<td>{PROV}</td>
+										</tr>
+										<tr>
+											<td><b><small>Complemento:</small></b></td>
+											<td>{COMPL}</td>
+										</tr>										
+										<tr>
+											<td><b><small>Empresa:</small></b></td>
+											<td>{EMPRESA} <i></i></td>
+										</tr>
+										<tr>
+											<td><b>Obs:</b></td>
+											<td>{OBS}</td>
+										</tr>											
+									</table>
+								</div>
+							</td>	
+							<td align="center"><small>{EMISSAO}</small></td>
+							<td align="center"><small>{VENCTO}</small></td>
+							<td align="center"><small>{SAIDA}</small></td>
+							<td align="center"><small>{PAGOEM}</small></td>
+							<td align="right" style="border-left:1px solid #ccc">{CONSUMO}</td>
+							<td align="right" style="border-left:1px solid #ccc; border-right:1px solid #ccc">{VALOR}</td>
+							<td align="center"><small>{LANCTO}</small></td>
+							<td align="center"><small>{USUARIO}</small></td>
+						</tr>
+					<!-- END EACH_NOTAS -->
+					<!-- BEGIN SEM_NOTAS -->
+						<tr>
+							<td colspan="10" align="center"><i><b>Não há notas lançadas para este serviço neste período.</b></i></td>
+						</tr>
+					<!-- END SEM_NOTAS -->
+					</tbody>					
+				</table>
+				
+			</div>
+		</div>
+		<!-- END RESULT_BLOCK -->		
+		<!-- END RESULT_BLOCK -->		
+	</div>
+	</br>
+</div>

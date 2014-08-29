@@ -1,0 +1,17 @@
+<div class="content">
+	<div class="inner-content">
+		<h2>Relatório de Lançamento de Contas</h2>
+		<p><b>Mostrando <font color="#4169E1">{CONTAQTD} contas</font> que faltam ser lançadas com o mês de referência de <font color="#4169E1">{MES_ANT}/{ANO}</font></b>:</p>
+		<ul>
+			
+			<!-- BEGIN EACH_CONTRATO -->
+				<p>{AUTOS}</p>{SQL}
+				<!-- BEGIN EACH_FALTA -->
+				<li style="margin-left:30px; list-style-type:square"><a href="ope_lancamento.php?id={ID}&dataref={MES_ANO}">{RGI} - {ENDERECO}</a></li>
+				<!-- END EACH_FALTA -->
+			<!-- END EACH_CONTRATO -->
+		</ul>
+
+	</div>
+	</br>
+</div>

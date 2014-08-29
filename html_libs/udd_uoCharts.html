@@ -1,0 +1,89 @@
+<div class="content">
+	<div class="inner-content">
+		<h2>Relatório a partir de {PERIODO} de {TIPONOME} - {UOSIGLA}</h2>
+		<div class="separator">
+			<div class="left-content">
+				<h3>Informações:</h3>
+				<ul>
+					<li><b>Quantidade de UCs : </b>{UCQTD}</li>
+					<li><b>RGI / Instalação das UCs{VARIAHEADER}: </b>{RGISINSTA}</li>
+					</ul>
+			</div>
+			<br style="clear:both" />
+			<br />
+		</div>
+	
+			<h3>Relatório Consolidado de Consumo - {UOSIGLA}</h3>
+			<div class="separator">
+				<div class="right-content" id="chart_div" style="height:500px">
+				
+				</div>	
+				<div class="left-subcontent">
+					<table class="tabela" width="100%">
+						<thead>
+							<tr>
+								<th rowspan="2" width="10%"></th>
+								<th colspan="2" width="60%">CONSUMO ({TIPOCONS})</th>
+								<th rowspan="2" width="30%">VARIAÇÃO <br /> {ANO_ANT} - {ANO}</th>
+							</tr>
+							<tr>
+								<th width="30%">{ANO_ANT}</th>
+								<th width="30%">{ANO}</th>
+							</tr>
+						</thead>
+						<tbody>
+							<!-- BEGIN EACH_CONSALL -->
+							<tr>
+								<th>{MESANALITICO}</th>
+								<td align="center">{CONSANT}</td>
+								<td align="center">{CONSPOST}</td>
+								<td align="center"><b>{CONSVARIA}</b></td>
+							</tr>
+							<!-- END EACH_CONSALL -->
+						</tbody>
+					</table>
+				</div>
+				<div id="area-chart1" class="uo-area-chart">
+				
+				</div>
+			</div>
+			<h3>Relatório Consolidado de Pagamentos - {UOSIGLA}</h3>
+			<div class="separator">
+				<div class="right-content" id="chart_div2" style="height:500px">
+				
+				</div>	
+				<div class="left-subcontent">
+					<table class="tabela" width="100%">
+						<thead>
+							<tr>
+								<th rowspan="2" width="10%"></th>
+								<th colspan="2" width="60%">CONSUMO (R$)</th>
+								<th rowspan="2" width="30%">VARIAÇÃO <br /> {ANO_ANT} - {ANO}</th>
+							</tr>
+							<tr>
+								<th width="30%">{ANO_ANT}</th>
+								<th width="30%">{ANO}</th>
+							</tr>
+						</thead>
+						<tbody>
+							<!-- BEGIN EACH_PAGOALL -->
+							<tr>
+								<th>{MESANALITICO}</th>
+								<td align="center">{PAGOANT}</td>
+								<td align="center">{PAGOPOST}</td>
+								<td align="center"><b>{PAGOVARIA}</b></td>
+							</tr>
+							<!-- END EACH_PAGOALL -->
+						</tbody>
+					</table>
+				</div>
+				<div id="area-chart2" class="uo-area-chart">
+				
+				</div>
+			</div>			
+		<br style="clear:both" />
+		<br />	
+	</div>
+	</br>
+</div>
+{TESTE}
