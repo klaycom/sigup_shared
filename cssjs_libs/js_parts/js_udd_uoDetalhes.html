@@ -1,20 +1,32 @@
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript">
-		
-		
-    
 	
-	google.load("visualization", "1", {packages:["corechart"]});
+    $(document).ready(function(){
+       
+        $('#ver_ano_opt').change(function(){
+            
+            var url = window.location.href;
+            var get = url + '&ano=' + $(this).val();
+            window.location= get;
+    
+        });
+        
+    });
+    
+    
+    google.load("visualization", "1", {packages:["corechart"]});
     google.setOnLoadCallback(drawChart);
 	
     function drawChart() {
       var data = google.visualization.arrayToDataTable([
         ['Serviço', 'Valor'],
+        
 		//<!-- BEGIN EACH_CHART_SERVICO -->
-		
+                
         ['{TIPOSERVICO}', {CHART_VALOR}]{COMA1}
         
 		//<!-- END EACH_CHART_SERVICO -->
+                
 		
       ]);
       var options = {
@@ -25,16 +37,16 @@
       var chart = new google.visualization.PieChart(document.getElementById('chart_gastos'));
       chart.draw(data, options);
     }
-	
-	
-	google.setOnLoadCallback(drawChart2);
+
+    google.setOnLoadCallback(drawChart2);
     function drawChart2() {
         var data = google.visualization.arrayToDataTable([
 			['Meses', '{ANO_ATU}', 'Média'],
+                        
 			//<!-- BEGIN EACH_AREACHART -->
-			
+                        
 			['{MESANO}/{ANO_ATU}', {AREA_VAL}, {MEDTOT_VAL}]{COMA}
-			
+                        
 			//<!-- END EACH_AREACHART -->
 
         ]);
@@ -51,5 +63,32 @@
 		chart.draw(data, options);
     }
 	
-	
+    //<!-- BEGIN EACH_AR_CHART -->
+    
+    google.setOnLoadCallback(drawArChart{CHRT_INDEX});
+    function drawArChart{CHRT_INDEX}() {
+        var data = google.visualization.arrayToDataTable([
+			['Meses', '{ANO_ATU}', 'Média'],
+                        
+			//<!-- BEGIN EACH_AR_VAL -->
+                        
+			['{MESANO}/{ANO_ATU}', {AR_VAL}, {AR_MED}]{COMA}
+                        
+			//<!-- END EACH_AR_VAL -->
+
+        ]);
+
+        var options = {
+			title: ' {CHRT_TIPO_NOME}',
+			hAxis: {title: 'Meses de {ANO_ATU}',  titleTextStyle: {color: '#333'}},
+			vAxis: {minValue: 0},
+			pointSize: 6,
+			chartArea:{left:90,top:50,width:"85%",height:"50%"}
+        };
+
+		var chart = new google.visualization.AreaChart(document.getElementById('ar-chart{CHRT_INDEX}'));
+		chart.draw(data, options);
+    }    
+    
+    //<!-- END EACH_AR_CHART -->
     </script>
