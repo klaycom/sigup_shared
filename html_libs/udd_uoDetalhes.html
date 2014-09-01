@@ -1,6 +1,14 @@
 <div class="content">
 	<div class="inner-content">
-		<h2>Relatório de {UOSIGLA} - {UONOME}</h2>
+
+            <h2>
+                <select style="float:right" id="ver_ano_opt">
+                    <!-- BEGIN VER_ANO_OPT -->
+                    <option value="{ANO_OPT}">{ANO_OPT_TXT}</option>
+                    <!-- END VER_ANO_OPT -->
+                </select>
+                Relatório de {UOSIGLA} - {UONOME}
+            </h2>
 		<div class="separator">
 			<div class="right-subcontent">
 				<h3>Proporção de gastos de {UOSIGLA} em {ANO_ATU}</h3>
@@ -23,7 +31,14 @@
 			<h3 class="click-topic" >Histórico Geral de {UOSIGLA} - {UONOME}</h3>
 			<div id="area-chart">
 			</div>
-		</div>                
+		</div>
+                <!-- BEGIN EACH_TIPO_CHART -->
+                <div style="width:49%;height:250px; float: left" id="chrt-{CHRT_INDEX}">
+                    <h3 class="click-topic" >Evolução de {CHRT_TIPO_NOME}</h3>
+                    <div id="ar-chart{CHRT_INDEX}">
+                    </div>
+                </div>
+                <!-- END EACH_TIPO_CHART -->
 		<div class="separator">
 			<h3 class="click-topic" >Pagamentos por Unidade Consumidora</h3>
 			<div class="simple-table">
