@@ -17,236 +17,204 @@
 	$tpl = new Template('html_libs/template.html');
 	
 	$tpl->addFile('SECONDMENU','html_libs/udd_secondMenu.html');
-	$tpl->addFile('JSCRIPT','cssjs_libs/js_parts/js_udd_ucDetalhes.html');
-	
+	$tpl->addFile('JSCRIPT','cssjs_libs/js_parts/js_udd_uoDetalhes.html');
+	$anoAtual = (isset($_GET['ano'])) ? $_GET['ano'] : Date('Y');
+        
+        $tipoVal;
 	
 	if(isset($_GET['chave'])){
 	
-		$chave = mysql_real_escape_string($_GET['chave']);
+		$chave = $_GET['chave'];
 		if(strlen($chave) == 40){
 		
-			$tpl->addFile('CONTEUDO','html_libs/udd_ucDetalhes.html');
-			$queryVerif = mysql_query("SELECT id FROM daee_uddc WHERE SHA1(id) = '".$_GET['chave']."'");
-			$tpl->CHAVE	 = $chave;
-			if(mysql_num_rows($queryVerif))	{
-					
-				$id = mysql_fetch_array($queryVerif)['id'];
-				$uc = new UnidadeConsumidora($id);
+			$tpl->addFile('CONTEUDO','html_libs/udd_uoDetalhes.html');
+			$queryVerif = mysql_query("SELECT id FROM daee_udds WHERE SHA1(id) = '".$_GET['chave']."'");
+			if(mysql_num_rows($queryVerif) == 1){
 
+			
+				$id = mysql_fetch_array($queryVerif)['id'];			
 				/*********************************
 				  MOSTRAR INFORMAÇÕES DO RELATÓRIO
-				 *********************************/ 
+				 *********************************/ 				
+				$uo = new Unidade($id);
+				$tpl->UOSIGLA		= $uo->getSigla();
+				$tpl->UONOME		= $uo->getNome();
+
+				$uoTipoServicos		= $uo->getTiposServicos();
+				$tpl->UOUCQTD		= $uo->getQtdUc();
+				$tpl->ANO_ATU		= $anoAtual;
+				$tpl->TIPOSSERVICOS = "";
 				
-				$tpl->ANO = Date('Y');
-				$tpl->ANO_ANT = Date('Y') - 1;
-				$tpl->TIPOCONS	= $uc->getTipoMedida();
-				$tpl->RGI 		= $uc->get('rgi');
-				$tpl->NOME		= $uc->getNome();
-				$tpl->TIPONOME	= $uc->getTipoNome();
-				$tpl->EMPRESA	= $uc->get('empresa')->getNome(). " CNPJ ".$uc->get('empresa')->transformCnpj($uc->get('empresa')->get('cnpj'));
-				$tpl->ENDERECO	= $uc->getEndereco() . " - " . $uc->getCidadeNome();
-				$tpl->UNIDADE	= $uc->get('uo')->getSigla();
+				$z = 0;
+				if(count($uoTipoServicos) > 0 ) foreach($uoTipoServicos as $tipo){
 				
-				
-				$eachMes = $uc->getExercicioMensal(Date('Y'));
-				//print_r($eachMes);
-				$mesConsTotal = 0;
-				$mesPagoTotal = 0;
-				$z = 1;
-				$somaAnt = $somaPost = 0; 
-				foreach($eachMes as $mes){
-				
-					$mesConsTotal += $mes['consumo'];
-					$mesPagoTotal += $mes['valor'];				
-					$tpl->MESSOMA = strtoupper(getMesNome($mes['mes_ref']));
-					$tpl->CONSSOMA	= tratarValor($mes['consumo']);
-					$tpl->PAGOSOMA	= tratarValor($mes['valor'], true);
+					$ucTipo = new UnidadeConsumidora(0, null, null, null, null, null, null, null, null, null, null, $tipo);
+					$mesmoTipo = $uo->getUcPorTipo($tipo);
+					$tpl->TIPOSSERVICOS .= "<br /> - <b><font color='navy'>" . $ucTipo->getTipoNome() . "</font></b>: <a href='udd_uoCharts.php?chave=". $_GET['chave'] ."&svc=$tipo&start=". $anoAtual ."'>";
+					$tpl->TIPOSSERVICOS .= "Relatório ". $anoAtual ." de " . count($mesmoTipo) . " UC(s)</a>";
+					$tpl->TIPOSERVICO = $ucTipo->getTipoNome();
+					$tpl->CHART_VALOR = $uo->getTotalPorTipo($tipo,$anoAtual);
 					
-					if($z > 1 && $z <= count($eachMes)){
-					
-						$divisor = ($eachMes[$z-1]['valor'] == 0) ? 1 : $eachMes[$z-1]['valor'];
-						$varia = (($eachMes[$z]['valor'] * 100) / $divisor) - 100;
-						$tpl->VARIASOMA = getPorcentagem($varia, true);
-					
-					}else{
-					
-						$tpl->VARIASOMA = "";
-					
-					}
-					
-										
-					$tpl->BLOCK('EACH_MENSAL');
+					if($z < count($uoTipoServicos)) $tpl->COMA1 = ",";
+					else $tpl->COMA1 = "";
 					$z++;
-				
-				}
-				$tpl->CONSTOTAL = tratarValor($mesConsTotal);
-				$tpl->PAGOTOTAL = tratarValor($mesPagoTotal, true);
-				
-				$mediaUC = (count($eachMes) > 0) ? $mesPagoTotal / count($eachMes) : 1;
-				$tpl->MEDIA	= tratarValor($mediaUC, true);
-				$tpl->AUMENTO = getPorcentagem((end($eachMes)['valor'] * 100) / $mediaUC - 100 ,true);
-				
-				
-				/*********************************
-				      MOSTRAR HISTÓRICO GERAL
-				 *********************************/ 
-				
-				$cumulativo = 0;
-				$cons_soma	= 0;
-				if(count($uc->getAllNotas(false)) >= 1){
-					foreach($uc->getAllNotas(false) as $notaRes){
 					
-						$nota = new Nota($notaRes['id']);
+					$tpl->block('EACH_CHART_SERVICO');
+                                        
+                                        $tipoVal[$tipo]['nome'] = $ucTipo->getTipoNome();
+                                        $tipoVal[$tipo]['mes'][1] = 0; $tipoVal[$tipo]['mes'][2] = 0;$tipoVal[$tipo]['mes'][3] = 0; $tipoVal[$tipo]['mes'][4] = 0;$tipoVal[$tipo]['mes'][5] = 0; $tipoVal[$tipo]['mes'][6] = 0;
+                                        $tipoVal[$tipo]['mes'][7] = 0; $tipoVal[$tipo]['mes'][8] = 0;$tipoVal[$tipo]['mes'][9] = 0; $tipoVal[$tipo]['mes'][10] = 0;$tipoVal[$tipo]['mes'][11] = 0; $tipoVal[$tipo]['mes'][12] = 0;				
+				}
+                                
+				/**********************************
+				     MOSTRAR PAGAMENTOS POR UC
+				**********************************/
+				$uoUcs = $uo->getAllUcs();
+				$pag_mensal;
+				$totalMensal;
+				$totalMensal[1] = 0; $totalMensal[2] = 0; $totalMensal[3] = 0; $totalMensal[4] = 0;
+				$totalMensal[5] = 0; $totalMensal[6] = 0; $totalMensal[7] = 0; $totalMensal[8] = 0;
+				$totalMensal[9] = 0; $totalMensal[10] = 0; $totalMensal[11] = 0; $totalMensal[12] = 0;				
+				$totalMensal[13] = 0; // TOTAL DA UO
+				foreach($uoUcs as $uoUcId){
+				
+					$uc = new UnidadeConsumidora($uoUcId);
+					$tpl->RGI = $uc->get('rgi');
+					$tpl->UCNOME = $uc->getNome();
+					$tpl->UCSTATUS = "<br>" . $uc->getAtivoText();
+					$tpl->UCTIPO = $uc->getTipoNome();
+					$tpl->UCEMPRESA = $uc->get('empresa')->getNome();
+					$tpl->UCCHAVE = SHA1($uc->get('id'));
+                                        $tipo = $uc->get('tipo');
+					
+					/**********************************
+						MOSTRAR PAGAMENTOS MENSAIS
+					**********************************/
+					$pagMensal = $uc->getExercicioMensal($anoAtual);
+					$index = 1;
+					$totalUc = 0;
+					
+					for($i=1;$i<=12; $i++){
+					
+						if(array_key_exists($index,$pagMensal) && $pagMensal[$index]['mes_ref'] == $i){
 						
-						if(!$nota->isEmpenho()){
+							$val = $pagMensal[$index]['valor'];
+							$tpl->UCMESVAL = tratarValor($val, true);
+							$index++;
 						
-							$tpl->NFMESANO	= $nota->get('data_ref');
-							$tpl->NFNUMERO	= $nota->get('numero');($nota->get('nome') != "") ? $nota->get('numero')." - ".$nota->get('nome') : $nota->get('numero');
-							$tpl->NFNOME	= ($nota->get('nome') != "") ? "- ".$nota->get('nome') : "";
-							/*$tpl->NFDATA	= setDateDiaMesAno($nota->get('emissao'));*/
-							$tpl->NFCONS	= tratarValor($nota->get('consumo'));
-							$tpl->NFPAGO	= tratarValor($nota->get('valor'), true);
-							$tpl->NFPROV	= $nota->get('provisoria');
-							$tpl->NFLANCPOR	= $nota->get('usuario')->get('login');
-							/*$tpl->NFSAIDA	= setDateDiaMesAno($nota->get('saida'));*/
-							/*$tpl->NFPAGODATA= setDateDiaMesAno($nota->get('pagoem'));*/
+						}else{
 							
-							$cumulativo += $nota->get('valor');
-							$tpl->NFCUMULATIVO = tratarValor($cumulativo,true);
-							$cons_soma  += $nota->get('consumo');
-							
+							$val = 0;
+							$tpl->UCMESVAL = "";
 						
 						}
 						
-						$tpl->BLOCK('EACH_FINANCEIRO');
-					
-					}
-				}
-				
-				$tpl->HISTCONSTOTAL = tratarValor($cons_soma);
-				$tpl->HISTPAGOTOTAL	= tratarValor($cumulativo,true);
-				
-				/*********************************
-				   MOSTRAR RELATÓRIOS ANALÍTICOS
-				 *********************************/ 				
-				
-				$exercicioPassado = $uc->getExercicioMensal(Date('Y') - 1);
-				$r = 1;
-				$s = 1;
-				$media['cons_ant'] = 0;
-				$media['pago_ant'] = 0;
-				$media['cons_post'] = 0;
-				$media['pago_post'] = 0;
-				
-				//print_r($exercicioPassado);
-				
-				for($i=1;$i<=13;$i++){
-				
-					$tpl->MESANALITICO = strtoupper(getMesNome($i));
-					
-					if(array_key_exists($r, $exercicioPassado) && $exercicioPassado[$r]['mes_ref'] == $i){ 
-					
-						$tpl->CHART_CONSANT = $consant = $exercicioPassado[$r]['consumo'];
-						$tpl->CHART_PAGOANT = $pagoant = $exercicioPassado[$r]['valor'];
-						$tpl->CONSANT = tratarValor($exercicioPassado[$r]['consumo']);
-						$tpl->PAGOANT = tratarValor($exercicioPassado[$r]['valor'],true);
-						$r++;
-					
-					}else{
-					
-						$tpl->CHART_CONSANT = $tpl->CHART_PAGOANT = $consant = $pagoant = 0;
-						$tpl->CONSANT = 0;
-						$tpl->PAGOANT = tratarValor(0, true);
-					
-					}
-					
-					if(array_key_exists($s, $eachMes) && $eachMes[$s]['mes_ref'] == $i){
-					
-						$tpl->CHART_CONSPOST = $conspost = $eachMes[$s]['consumo'];
-						$tpl->CHART_PAGOPOST = $pagopost = $eachMes[$s]['valor'];
-						$tpl->CONSPOST = tratarValor($eachMes[$s]['consumo']);
-						$tpl->PAGOPOST = tratarValor($eachMes[$s]['valor'],true);
-						$s++;
-					
-					}else{
-					
-						$tpl->CHART_CONSPOST = $tpl->CHART_PAGOPOST = $conspost = $pagopost = 0;
-						$tpl->CONSPOST = 0;
-						$tpl->PAGOPOST = tratarValor(0,true);
-					
-					}
-					
-					$media['cons_ant']	+= $consant; 
-					$media['pago_ant']	+= $pagoant;
-					$media['cons_post']	+= $conspost;
-					$media['pago_post']	+= $pagopost;
-					
-					if($i == 13){ // MOSTRAR MÉDIAS
-					
-						$r = ($r == 1) ? 2 : $r;
-						$s = ($s == 1) ? 2 : $s;
+						$totalUc += $val;
+						$totalMensal[$i] += $val;
+						$totalMensal[13] += $val;
 						
-						$tpl->CHART_CONSANT = $media_consant	= round($media['cons_ant'] / ($r-1) * 100) / 100;
-						$tpl->CHART_PAGOANT = $media_pagoant	= round($media['pago_ant'] / ($r-1) * 100) / 100;
-						$tpl->CHART_CONSPOST = $media_conspost	= round($media['cons_post'] / ($s-1) * 100) / 100;
-						$tpl->CHART_PAGOPOST = $media_pagopost	= round($media['pago_post'] / ($s-1) * 100) / 100;
-						
-						$tpl->CONSANT	= tratarValor($media_consant);
-						$tpl->PAGOANT	= tratarValor($media_pagoant,true);					
-						$tpl->CONSPOST	= tratarValor($media_conspost);
-						$tpl->PAGOPOST	= tratarValor($media_pagopost, true);
-						$tpl->COMA = "";
-					
-					}else{
-					
-						$tpl->COMA = ",";
+						$tpl->block('EACH_MESUC');
+                                                
+                                                $tipoVal[$tipo]['mes'][$i] += $val;
 					
 					}
-					
-					if($conspost != 0 && $pagopost != 0 && $consant != 0 && $pagoant != 0){
-					
-						$cons_varia = (($conspost * 100) / $consant) - 100;
-						$pago_varia = (($pagopost * 100) / $pagoant) - 100;
-						
-					
-					} else{
-					
-						$cons_varia = $pago_varia = 0;
-					
-					}
+					$tpl->UCTOTAL = tratarValor($totalUc, true);
 					
 					
-					$tpl->CONSVARIA	= getPorcentagem($cons_varia, true);
-					$tpl->PAGOVARIA = getPorcentagem($pago_varia, true);
-					
-					$tpl->block('EACH_CONSANALITICO');
-					$tpl->block('EACH_PAGOANALITICO');
-					
-					$tpl->block('EACH_CHART_CONS');
-					$tpl->block('EACH_CHART_PAGO');
+					$tpl->block('EACH_UC');
 				
 				}
-			
-			
+
+                                $mediaMensal = $totalMensal[13] / getDivisorParaMedia($totalMensal);
+                                //echo $mediaMensal;
+				/**********************************
+					MOSTRAR TOTAIS MENSAIS
+				**********************************/				
+				for($i=1;$i<=12; $i++){
+				
+					$tpl->UCMESTOTAL = tratarValor($totalMensal[$i],true);
+					$tpl->block('EACH_MESUCTOTAL');
+					
+					$tpl->MESANO = getMesNome($i);
+					$tpl->AREA_VAL = $totalMensal[$i];
+                                        
+                                       $tpl->MEDTOT_VAL = $mediaMensal;
+					
+					if($i < 12) $tpl->COMA = ",";
+					else $tpl->COMA = "";
+					
+					$tpl->block('EACH_AREACHART');
+				
+				}
+				
+				$tpl->UOTOTAL = tratarValor($totalMensal[13],true);
+                                
+                                $chrt_index = 0;
+                                foreach($tipoVal as $tp){
+                                    
+                                    $tpl->CHRT_TIPO_NOME = $tp['nome'];
+                                    $tpl->CHRT_INDEX = $chrt_index;
+                                    $chrt_index++;
+                                    
+                                    $ar_med = round(array_sum($tp['mes']) / getDivisorParaMedia($tp['mes']), 2);
+                                    
+                                    for($i=1;$i<=12; $i++){
+                                        
+                                        $tpl->MESANO = getMesNome($i);
+                                        $tpl->AR_VAL = ($tp['mes'][$i] > 0) ? $tp['mes'][$i] : 0;
+                                        $tpl->COMA   = ($i < 12) ? ',' : '';
+                                        $tpl->AR_MED = $ar_med;
+                                        
+                                        $tpl->block('EACH_AR_VAL');
+                                        
+                                    }                                    
+                                                                        
+                                    $tpl->block('EACH_AR_CHART');
+                                    $tpl->block('EACH_TIPO_CHART');
+
+                                }
+
+                                $tpl->ANO_OPT = $anoAtual;
+                                $tpl->ANO_OPT_TXT = 'Visualizando exercício de ' . $anoAtual;
+                                $tpl->block('VER_ANO_OPT');
+                                
+                                
+                                for($i = 2012; $i<=Date('Y'); $i++){
+                                    
+                                    $tpl->ANO_OPT = $i;
+                                    $tpl->ANO_OPT_TXT = 'Exercício de ' . $i;
+                                    $tpl->block('VER_ANO_OPT');
+                                    
+                                }
 			}else{
-			
-				header("Location: udd_relatorioUC.php");
-			
+		
+				header("Location: udd_relatorioUO.php");
+		
 			}
+
 		
 		}else{
 		
-			header("Location: udd_relatorioUC.php");
+			header("Location: udd_relatorioUO.php");
 		
 		}
 	
-	}	
-	
-	
+	}
+        
 	$fim = execucao();
 	$tempo = number_format(($fim-$inicio),6);
 	$tpl->EXECTIME = "Tempo de Execução: <b>".$tempo."</b> segundos";
 	
 	$tpl->show();
-	
+
+        function getDivisorParaMedia(array $array){
+            
+            $ret = 0;
+            $loop = 12;
+            for ($i=1; $i <= $loop; $i++) {
+                if($array[$i] > 0) $ret++;
+            }
+            return ($ret == 0) ? 1 : $ret;
+            
+        }
 ?>
